@@ -34,26 +34,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<!-- Eat own dog food -->
-				<groupId>jp.skypencil</groupId>
-				<artifactId>maven-jsr305-plugin</artifactId>
-				<version>0.2-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>enhance</goal>
-						</goals>
-						<configuration>
-							<nullCheck>
-								<targetScope>DEFAULT</targetScope>
-								<level>STRICT</level>
-								<exception>java.lang.NullPointerException</exception>
-							</nullCheck>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
