@@ -19,7 +19,7 @@ package jp.skypencil.jsr305;
 import java.io.File;
 import java.io.IOException;
 
-import jp.skypencil.jsr305.nullable.NullCheckLevel;
+import jp.skypencil.jsr305.nullable.Setting;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -47,24 +47,10 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 */
 	protected File classesDirectory;
 	/**
-	 * @parameter expression="${jsr305.targetScope}"
-	 *            default-value="PUBLIC"
+	 * @parameter
 	 * @required
 	 */
-	protected Scope targetScope;
-	/**
-	 * @parameter expression="${jsr305.nullCheckLevel}"
-	 *            default-value="PERMISSIVE"
-	 * @required
-	 */
-	protected NullCheckLevel nullCheckLevel;
-	/**
-	 * @parameter expression="${jsr305.exceptionForNullCheck}"
-	 *            default-value="java.lang.IllegalArgumentException"
-	 * @required
-	 */
-	protected String exceptionNameForNullCheck;
-	private Class<? extends Throwable> exceptionForNullCheck;
+	protected Setting nullCheck;
 
 	@Override
 	public void execute() throws MojoExecutionException {
@@ -74,7 +60,6 @@ public class MavenJSR305Mojo extends AbstractMojo {
 		}
 
 		try {
-			this.exceptionForNullCheck = createClass();
 			enhance(classesDirectory);
 		} catch (IOException e) {
 			throw new MojoExecutionException("A inner exception occurs", e);
@@ -84,13 +69,7 @@ public class MavenJSR305Mojo extends AbstractMojo {
 		getLog().info("finished.");
 	}
 
-	@SuppressWarnings("unchecked")
-	private Class<? extends Throwable> createClass() throws ClassNotFoundException {
-		return (Class<? extends Throwable>) Class.forName(exceptionNameForNullCheck);
-	}
-
 	private void enhance(File dir) throws IOException, ClassNotFoundException {
-		Setting setting = new Setting(targetScope, nullCheckLevel, exceptionForNullCheck );
 		for (File child : dir.listFiles()) {
 			if (child.isDirectory()) {
 				enhance(child);
@@ -103,7 +82,7 @@ public class MavenJSR305Mojo extends AbstractMojo {
 
 					ClassReader reader = new ClassReader(binary);
 					ClassWriter writer = new ClassWriter(0);
-					reader.accept(new MavenJSR305ClassVisitor(api, writer, setting), 0);
+					reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck), 0);
 					byte[] enhanced = writer.toByteArray();
 					Files.write(enhanced, child);
 				}

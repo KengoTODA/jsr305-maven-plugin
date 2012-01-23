@@ -2,7 +2,6 @@ package jp.skypencil.jsr305.nullable;
 
 import static org.junit.Assert.assertEquals;
 import jp.skypencil.jsr305.Scope;
-import jp.skypencil.jsr305.Setting;
 
 import org.junit.Test;
 import org.objectweb.asm.MethodVisitor;

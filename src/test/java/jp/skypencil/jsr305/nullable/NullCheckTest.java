@@ -13,7 +13,6 @@ import javax.annotation.Nullable;
 
 import jp.skypencil.jsr305.MavenJSR305ClassVisitor;
 import jp.skypencil.jsr305.Scope;
-import jp.skypencil.jsr305.Setting;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -3,6 +3,7 @@ package jp.skypencil.jsr305;
 import javax.annotation.Nullable;
 
 import jp.skypencil.jsr305.nullable.NullCheckMethodVisitor;
+import jp.skypencil.jsr305.nullable.Setting;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -36,7 +37,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		if (isEnum && NAME_OF_CONSTRCTOR.equals(name)) {
 			// don't inject to constructors of Enum, because it gets null always
 			return mv;
-		} else if (setting.getTargetScopeForNullCheck().contains(methodScope)) {
+		} else if (setting.getTargetScope().contains(methodScope)) {
 			Type[] argumentTypes = Type.getArgumentTypes(desc);
 			boolean isStaticMethod = (access & Opcodes.ACC_STATIC) != 0;
 			return new NullCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, setting);

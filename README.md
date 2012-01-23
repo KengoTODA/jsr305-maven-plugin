@@ -23,9 +23,18 @@ Just write this in your pom.xml.
 ## Null check
 This feature injects a code like `if (arg == null) {throw new IllegalArgumentException("...");}`.
 This feature has 3 configurations.
- 1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE)
- 2. null check level (STRICT, PERMISSIVE)
- 3. exception which will be thrown
+1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE)
+2. null check level (STRICT, PERMISSIVE)
+3. exception which will be thrown
+
+You can write them in your pom.xml. For example:
+    <configuration>
+    	<nullCheck>
+    		<targetScope>DEFAULT</targetScope>
+    		<level>STRICT</level>
+    		<exception>java.lang.NullPointerException</exception>
+    	</nullCheck>
+    </configuration>
 
 ### 1st configuration: target scope
 If you choose `PROTECTED` for target scope, check logics will be injected to `public` and `protected` methods

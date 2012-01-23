@@ -2,8 +2,6 @@ package jp.skypencil.jsr305.nullable;
 
 import javax.annotation.Nonnegative;
 
-import jp.skypencil.jsr305.Setting;
-
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
@@ -21,10 +19,10 @@ public class NullCheckMethodVisitor extends MethodVisitor {
 
 	public NullCheckMethodVisitor(int api, MethodVisitor inner, boolean isStatic, Type[] argumentTypes, Setting setting) {
 		super(api, inner);
-		this.factory = setting.getNullCheckLevel().createFactory(argumentTypes.length);
+		this.factory = setting.getLevel().createFactory(argumentTypes.length);
 		this.isStaticMethod = isStatic;
 		this.argumentTypes = argumentTypes;
-		this.exception = setting.getExceptionForNullCheck();
+		this.exception = setting.getException();
 	}
 
 	@Override

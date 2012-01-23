@@ -44,9 +44,11 @@
 							<goal>enhance</goal>
 						</goals>
 						<configuration>
-							<targetScope>DEFAULT</targetScope>
-							<nullCheckLevel>STRICT</nullCheckLevel>
-							<exceptionForNullCheck>java.lang.NullPointerException</exceptionForNullCheck>
+							<nullCheck>
+								<targetScope>DEFAULT</targetScope>
+								<level>STRICT</level>
+								<exception>java.lang.NullPointerException</exception>
+							</nullCheck>
 						</configuration>
 					</execution>
 				</executions>
