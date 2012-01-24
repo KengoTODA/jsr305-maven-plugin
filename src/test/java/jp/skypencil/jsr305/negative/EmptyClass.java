@@ -36,6 +36,17 @@ public final class EmptyClass {
 	@SuppressWarnings("unused")
 	private void privateNonnegativeLongMethod(@Nonnegative long argument) {}
 
+	public void publicNormalFloatMethod(float argument) {}
+	public void publicNonnegativeFloatMethod(@Nonnegative float argument) {}
+	protected void protectedNormalFloatMethod(float argument) {}
+	protected void protectedNonnegativeFloatMethod(@Nonnegative float argument) {}
+	void defaultNormalFloatMethod(float argument) {}
+	void defaultNonnegativeFloatMethod(@Nonnegative float argument) {}
+	@SuppressWarnings("unused")
+	private void privateNormalFloatMethod(float argument) {}
+	@SuppressWarnings("unused")
+	private void privateNonnegativeFloatMethod(@Nonnegative float argument) {}
+
 	// to check working well for methods without arguments 
 	public void publicMethodWithoutArguments() {
 	}
