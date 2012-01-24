@@ -86,6 +86,7 @@ public final class EmptyClass {
 	public void publicMethodWithoutArguments() {
 	}
 	// to check working well for methods with non-Number arguments 
-	public void publicMethodWithPrimitive(Object object) {
+	public void publicMethodWithNonNumber(@Nonnegative Object object) {
+		// this method will throw ClassCastException with non-Number arguments
 	}
 }

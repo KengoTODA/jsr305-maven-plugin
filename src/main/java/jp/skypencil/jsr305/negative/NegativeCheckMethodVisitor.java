@@ -67,6 +67,7 @@ public final class NegativeCheckMethodVisitor extends MethodVisitor {
 		Label afterCheck = new Label();
 		if (opcodeToLoad == Opcodes.ALOAD) {
 			visitVarInsn(Opcodes.ALOAD, localVarIndex);
+			visitTypeInsn(Opcodes.CHECKCAST, Type.getInternalName(Number.class));
 			visitMethodInsn(Opcodes.INVOKEVIRTUAL, Type.getInternalName(Number.class), "floatValue", Type.getMethodDescriptor(Type.FLOAT_TYPE));
 		} else {
 			visitVarInsn(opcodeToLoad, localVarIndex);
