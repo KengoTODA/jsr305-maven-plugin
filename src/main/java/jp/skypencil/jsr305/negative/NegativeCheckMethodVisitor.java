@@ -71,15 +71,20 @@ public final class NegativeCheckMethodVisitor extends MethodVisitor {
 		} else {
 			visitVarInsn(opcodeToLoad, localVarIndex);
 		}
-		if (opcodeToLoad == Opcodes.DLOAD) {
-			visitInsn(Opcodes.DCONST_0);
-			visitInsn(Opcodes.DCMPL);
-		} else if (opcodeToLoad == Opcodes.LLOAD) {
-			visitInsn(Opcodes.LCONST_0);
-			visitInsn(Opcodes.LCMP);
-		} else if (opcodeToLoad == Opcodes.FLOAD || opcodeToLoad == Opcodes.ALOAD) {
-			visitInsn(Opcodes.FCONST_0);
-			visitInsn(Opcodes.FCMPL);
+		switch (opcodeToLoad) {
+			case Opcodes.LLOAD:
+				visitInsn(Opcodes.LCONST_0);
+				visitInsn(Opcodes.LCMP);
+				break;
+			case Opcodes.DLOAD:
+				visitInsn(Opcodes.DCONST_0);
+				visitInsn(Opcodes.DCMPL);
+				break;
+			case Opcodes.ALOAD:
+			case Opcodes.FLOAD:
+				visitInsn(Opcodes.FCONST_0);
+				visitInsn(Opcodes.FCMPL);
+				break;
 		}
 		visitJumpInsn(Opcodes.IFGE, afterCheck);
 
