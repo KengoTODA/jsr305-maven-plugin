@@ -28,6 +28,36 @@ public class CornerCaseTest {
 		test("jp/skypencil/jsr305/negative/EmptyStaticClass");
 	}
 
+	@Test
+	public void testMethodWithNan() throws Throwable {
+		testWithNan("jp/skypencil/jsr305/negative/EmptyClass");
+	}
+
+	@Test
+	public void testStaticMethodWithNan() throws Throwable {
+		testWithNan("jp/skypencil/jsr305/negative/EmptyStaticClass");
+	}
+
+	@Test
+	public void testMethodWithInfinity() throws Throwable {
+		testWithInfinity("jp/skypencil/jsr305/negative/EmptyClass");
+	}
+
+	@Test
+	public void testStaticMethodWithInfinity() throws Throwable {
+		testWithInfinity("jp/skypencil/jsr305/negative/EmptyStaticClass");
+	}
+
+	@Test
+	public void testMethodWithNegativeInfinity() throws Throwable {
+		testWithNegativeInfinity("jp/skypencil/jsr305/negative/EmptyClass");
+	}
+
+	@Test
+	public void testStaticMethodWithNegativeInfinity() throws Throwable {
+		testWithNegativeInfinity("jp/skypencil/jsr305/negative/EmptyStaticClass");
+	}
+
 	private void test(String innerClassName) throws Throwable {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
@@ -44,6 +74,58 @@ public class CornerCaseTest {
 			Assert.fail();
 		} catch (InvocationTargetException expected) {
 			assertThat(expected.getCause(), is(ClassCastException.class));
+		}
+	}
+
+	private void testWithNan(String innerClassName) throws Throwable {
+		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
+		ClassWriter writer = new ClassWriter(0);
+		Setting setting = new Setting(Scope.PUBLIC, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		byte[] classBinary = writer.toByteArray();
+
+		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
+		Object instance = clazz.newInstance();
+
+		Method method = clazz.getDeclaredMethod("publicNonnegativeDoubleMethod", double.class);
+		try {
+			method.invoke(instance, Double.NaN);
+			Assert.fail();
+		} catch (InvocationTargetException expected) {
+			assertThat(expected.getCause(), is(IllegalArgumentException.class));
+		}
+	}
+
+	private void testWithInfinity(String innerClassName) throws Throwable {
+		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
+		ClassWriter writer = new ClassWriter(0);
+		Setting setting = new Setting(Scope.PUBLIC, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		byte[] classBinary = writer.toByteArray();
+
+		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
+		Object instance = clazz.newInstance();
+
+		Method method = clazz.getDeclaredMethod("publicNonnegativeDoubleMethod", double.class);
+		method.invoke(instance, Double.POSITIVE_INFINITY);
+	}
+
+	private void testWithNegativeInfinity(String innerClassName) throws Throwable {
+		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
+		ClassWriter writer = new ClassWriter(0);
+		Setting setting = new Setting(Scope.PUBLIC, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		byte[] classBinary = writer.toByteArray();
+
+		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
+		Object instance = clazz.newInstance();
+
+		Method method = clazz.getDeclaredMethod("publicNonnegativeDoubleMethod", double.class);
+		try {
+			method.invoke(instance, Double.NEGATIVE_INFINITY);
+			Assert.fail();
+		} catch (InvocationTargetException expected) {
+			assertThat(expected.getCause(), is(IllegalArgumentException.class));
 		}
 	}
 
