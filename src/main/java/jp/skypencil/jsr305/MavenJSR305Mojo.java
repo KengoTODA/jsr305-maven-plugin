@@ -19,8 +19,6 @@ package jp.skypencil.jsr305;
 import java.io.File;
 import java.io.IOException;
 
-import jp.skypencil.jsr305.nullable.Setting;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.objectweb.asm.ClassReader;
@@ -50,7 +48,12 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 * @parameter
 	 * @required
 	 */
-	protected Setting nullCheck;
+	protected jp.skypencil.jsr305.nullable.Setting nullCheck;
+	/**
+	 * @parameter
+	 * @required
+	 */
+	protected jp.skypencil.jsr305.negative.Setting negativeCheck;
 
 	@Override
 	public void execute() throws MojoExecutionException {
@@ -82,7 +85,7 @@ public class MavenJSR305Mojo extends AbstractMojo {
 
 					ClassReader reader = new ClassReader(binary);
 					ClassWriter writer = new ClassWriter(0);
-					reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck), 0);
+					reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck, negativeCheck), 0);
 					byte[] enhanced = writer.toByteArray();
 					Files.write(enhanced, child);
 				}
