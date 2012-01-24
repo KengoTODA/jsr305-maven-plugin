@@ -1,5 +1,7 @@
 package jp.skypencil.jsr305.negative;
 
+import java.math.BigDecimal;
+
 import javax.annotation.Nonnegative;
 
 public class EmptyStaticClass {
@@ -68,6 +70,17 @@ public class EmptyStaticClass {
 	private static void privateNormalShortMethod(short argument) {}
 	@SuppressWarnings("unused")
 	private static void privateNonnegativeShortMethod(@Nonnegative short argument) {}
+
+	public static void publicNormalBigDecimalMethod(BigDecimal argument) {}
+	public static void publicNonnegativeBigDecimalMethod(@Nonnegative BigDecimal argument) {}
+	protected static void protectedNormalBigDecimalMethod(BigDecimal argument) {}
+	protected static void protectedNonnegativeBigDecimalMethod(@Nonnegative BigDecimal argument) {}
+	static void defaultNormalBigDecimalMethod(BigDecimal argument) {}
+	static void defaultNonnegativeBigDecimalMethod(@Nonnegative BigDecimal argument) {}
+	@SuppressWarnings("unused")
+	private static void privateNormalBigDecimalMethod(BigDecimal argument) {}
+	@SuppressWarnings("unused")
+	private static void privateNonnegativeBigDecimalMethod(@Nonnegative BigDecimal argument) {}
 
 	// to check working well for methods without arguments 
 	public static void publicMethodWithoutArguments() {

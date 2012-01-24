@@ -77,7 +77,7 @@ public final class NegativeCheckMethodVisitor extends MethodVisitor {
 		} else if (opcodeToLoad == Opcodes.LLOAD) {
 			visitInsn(Opcodes.LCONST_0);
 			visitInsn(Opcodes.LCMP);
-		} else if (opcodeToLoad == Opcodes.FLOAD) {
+		} else if (opcodeToLoad == Opcodes.FLOAD || opcodeToLoad == Opcodes.ALOAD) {
 			visitInsn(Opcodes.FCONST_0);
 			visitInsn(Opcodes.FCMPL);
 		}
