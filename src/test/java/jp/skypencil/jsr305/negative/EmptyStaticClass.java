@@ -25,6 +25,17 @@ public class EmptyStaticClass {
 	@SuppressWarnings("unused")
 	private static void privateNonnegativeDoubleMethod(@Nonnegative double argument) {}
 
+	public static void publicNormalLongMethod(long argument) {}
+	public static void publicNonnegativeLongMethod(@Nonnegative long argument) {}
+	protected static void protectedNormalLongMethod(long argument) {}
+	protected static void protectedNonnegativeLongMethod(@Nonnegative long argument) {}
+	static void defaultNormalLongMethod(long argument) {}
+	static void defaultNonnegativeLongMethod(@Nonnegative long argument) {}
+	@SuppressWarnings("unused")
+	private static void privateNormalLongMethod(long argument) {}
+	@SuppressWarnings("unused")
+	private static void privateNonnegativeLongMethod(@Nonnegative long argument) {}
+
 	// to check working well for methods without arguments 
 	public static void publicMethodWithoutArguments() {
 	}

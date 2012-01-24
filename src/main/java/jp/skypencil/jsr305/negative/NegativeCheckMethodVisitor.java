@@ -74,6 +74,9 @@ public final class NegativeCheckMethodVisitor extends MethodVisitor {
 		if (opcodeToLoad == Opcodes.DLOAD) {
 			visitInsn(Opcodes.DCONST_0);
 			visitInsn(Opcodes.DCMPL);
+		} else if (opcodeToLoad == Opcodes.LLOAD) {
+			visitInsn(Opcodes.LCONST_0);
+			visitInsn(Opcodes.LCMP);
 		}
 		visitJumpInsn(Opcodes.IFGE, afterCheck);
 
