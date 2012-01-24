@@ -6,10 +6,11 @@ a Maven plugin which injects precondition check logics to your classes.
 
 # how to use
 Just write this in your pom.xml.
+
     <plugin>
     	<groupId>jp.skypencil</groupId>
     	<artifactId>maven-jsr305-plugin</artifactId>
-    	<version>0.1-SNAPSHOT</version>
+    	<version>0.2</version>
     	<executions>
     		<execution>
     			<goals>
@@ -23,11 +24,13 @@ Just write this in your pom.xml.
 ## Null check
 This feature injects a code like `if (arg == null) {throw new IllegalArgumentException("...");}`.
 This feature has 3 configurations.
+
 1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE)
 2. null check level (STRICT, PERMISSIVE)
 3. exception which will be thrown
 
 You can write them in your pom.xml. For example:
+
     <configuration>
     	<nullCheck>
     		<targetScope>DEFAULT</targetScope>
@@ -51,16 +54,18 @@ Default value is `PERMISSIVE`.
 
 ### 3rd configuration: exception which will be thrown
 You can specify an exception which has a constructor with a String argument.
-Default is `java.lang.IllegalArgumentException`.
+Default value is `java.lang.IllegalArgumentException`.
 
 
 ## Negative check
 This feature injects a code like `if (arg < 0) {throw new IllegalArgumentException("...");}`.
 This feature has 2 configurations.
+
 1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE)
 2. exception which will be thrown
 
 You can write them in your pom.xml. For example:
+
     <configuration>
     	<negativeCheck>
     		<targetScope>DEFAULT</targetScope>
@@ -78,7 +83,7 @@ Default value is `PUBLIC`.
 
 ### 2nd configuration: exception which will be thrown
 You can specify an exception which has a constructor with a String argument.
-Default is `java.lang.IllegalArgumentException`.
+Default value is `java.lang.IllegalArgumentException`.
 
 
 # copyright and license
