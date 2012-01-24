@@ -1,5 +1,6 @@
 # maven-jsr305-plugin
 a Maven plugin which injects precondition check logics to your classes.
+![built and tested on DEV@cloud](http://static-www.cloudbees.com/images/badges/BuiltOnDEV.png)
 
 ## about jsr305
  - http://jcp.org/en/jsr/detail?id=305
@@ -84,6 +85,14 @@ Default value is `PUBLIC`.
 ### 2nd configuration: exception which will be thrown
 You can specify an exception which has a constructor with a String argument.
 Default value is `java.lang.IllegalArgumentException`.
+
+
+# History
+## 0.1
+- supported null check feature with @Nonnull and @Nullable annotation
+
+## 0.2
+- supported negative check feature with @Nonnegative annotation
 
 
 # copyright and license
