@@ -13,4 +13,22 @@ public class EmptyStaticClass {
 	private static void privateNormalIntMethod(int argument) {}
 	@SuppressWarnings("unused")
 	private static void privateNonnegativeIntMethod(@Nonnegative int argument) {}
+
+	public static void publicNormalDoubleMethod(double argument) {}
+	public static void publicNonnegativeDoubleMethod(@Nonnegative double argument) {}
+	protected static void protectedNormalDoubleMethod(double argument) {}
+	protected static void protectedNonnegativeDoubleMethod(@Nonnegative double argument) {}
+	static void defaultNormalDoubleMethod(double argument) {}
+	static void defaultNonnegativeDoubleMethod(@Nonnegative double argument) {}
+	@SuppressWarnings("unused")
+	private static void privateNormalDoubleMethod(double argument) {}
+	@SuppressWarnings("unused")
+	private static void privateNonnegativeDoubleMethod(@Nonnegative double argument) {}
+
+	// to check working well for methods without arguments 
+	public static void publicMethodWithoutArguments() {
+	}
+	// to check working well for methods with non-Number arguments 
+	public static void publicMethodWithPrimitive(Object object) {
+	}
 }

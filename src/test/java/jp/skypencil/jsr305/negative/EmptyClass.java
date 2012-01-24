@@ -14,6 +14,17 @@ public final class EmptyClass {
 	@SuppressWarnings("unused")
 	private void privateNonnegativeIntMethod(@Nonnegative int argument) {}
 
+	public void publicNormalDoubleMethod(double argument) {}
+	public void publicNonnegativeDoubleMethod(@Nonnegative double argument) {}
+	protected void protectedNormalDoubleMethod(double argument) {}
+	protected void protectedNonnegativeDoubleMethod(@Nonnegative double argument) {}
+	void defaultNormalDoubleMethod(double argument) {}
+	void defaultNonnegativeDoubleMethod(@Nonnegative double argument) {}
+	@SuppressWarnings("unused")
+	private void privateNormalDoubleMethod(double argument) {}
+	@SuppressWarnings("unused")
+	private void privateNonnegativeDoubleMethod(@Nonnegative double argument) {}
+
 	// to check working well for methods without arguments 
 	public void publicMethodWithoutArguments() {
 	}

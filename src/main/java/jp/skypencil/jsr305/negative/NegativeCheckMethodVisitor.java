@@ -71,6 +71,10 @@ public final class NegativeCheckMethodVisitor extends MethodVisitor {
 		} else {
 			visitVarInsn(opcodeToLoad, localVarIndex);
 		}
+		if (opcodeToLoad == Opcodes.DLOAD) {
+			visitInsn(Opcodes.DCONST_0);
+			visitInsn(Opcodes.DCMPL);
+		}
 		visitJumpInsn(Opcodes.IFGE, afterCheck);
 
 		visitTypeInsn(Opcodes.NEW, Type.getInternalName(exception));
@@ -95,6 +99,6 @@ public final class NegativeCheckMethodVisitor extends MethodVisitor {
 
 	@Override
 	public void visitMaxs(int maxStack, int maxLocals) {
-		super.visitMaxs(Math.max(3, maxStack), maxLocals);
+		super.visitMaxs(Math.max(4, maxStack), maxLocals);
 	}
 }
