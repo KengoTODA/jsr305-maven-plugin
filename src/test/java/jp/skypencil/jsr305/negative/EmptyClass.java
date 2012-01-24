@@ -47,6 +47,28 @@ public final class EmptyClass {
 	@SuppressWarnings("unused")
 	private void privateNonnegativeFloatMethod(@Nonnegative float argument) {}
 
+	public void publicNormalByteMethod(byte argument) {}
+	public void publicNonnegativeByteMethod(@Nonnegative byte argument) {}
+	protected void protectedNormalByteMethod(byte argument) {}
+	protected void protectedNonnegativeByteMethod(@Nonnegative byte argument) {}
+	void defaultNormalByteMethod(byte argument) {}
+	void defaultNonnegativeByteMethod(@Nonnegative byte argument) {}
+	@SuppressWarnings("unused")
+	private void privateNormalByteMethod(byte argument) {}
+	@SuppressWarnings("unused")
+	private void privateNonnegativeByteMethod(@Nonnegative byte argument) {}
+
+	public void publicNormalShortMethod(short argument) {}
+	public void publicNonnegativeShortMethod(@Nonnegative short argument) {}
+	protected void protectedNormalShortMethod(short argument) {}
+	protected void protectedNonnegativeShortMethod(@Nonnegative short argument) {}
+	void defaultNormalShortMethod(short argument) {}
+	void defaultNonnegativeShortMethod(@Nonnegative short argument) {}
+	@SuppressWarnings("unused")
+	private void privateNormalShortMethod(short argument) {}
+	@SuppressWarnings("unused")
+	private void privateNonnegativeShortMethod(@Nonnegative short argument) {}
+
 	// to check working well for methods without arguments 
 	public void publicMethodWithoutArguments() {
 	}
