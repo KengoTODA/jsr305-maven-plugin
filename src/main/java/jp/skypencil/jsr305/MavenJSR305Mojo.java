@@ -46,12 +46,10 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	protected File classesDirectory;
 	/**
 	 * @parameter
-	 * @required
 	 */
 	protected jp.skypencil.jsr305.nullable.Setting nullCheck;
 	/**
 	 * @parameter
-	 * @required
 	 */
 	protected jp.skypencil.jsr305.negative.Setting negativeCheck;
 	/**
