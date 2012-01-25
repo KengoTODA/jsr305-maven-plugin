@@ -97,6 +97,7 @@ Default value is `java.lang.IllegalArgumentException`.
 
 ## 0.3
 - added `NONE` to scope
+- started to build on cloudbees
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)

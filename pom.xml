@@ -89,14 +89,14 @@
 	</dependencies>
 	<distributionManagement>
 		<repository>
-			<id>release.eller86.cloudbees.com</id>
+			<id>release.skypencil.forge.cloudbees.com</id>
 			<uniqueVersion>false</uniqueVersion>
-			<url>dav:https://repository-eller86.forge.cloudbees.com/release</url>
+			<url>dav:https://repository-skypencil.forge.cloudbees.com/release/</url>
 		</repository>
 		<snapshotRepository>
-			<id>snapshot.eller86.cloudbees.com</id>
+			<id>snapshot.skypencil.forge.cloudbees.com</id>
 			<uniqueVersion>true</uniqueVersion>
-			<url>dav:https://repository-eller86.forge.cloudbees.com/snapshot</url>
+			<url>dav:https://repository-skypencil.forge.cloudbees.com/snapshot/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
