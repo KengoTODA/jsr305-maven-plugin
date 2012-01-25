@@ -29,6 +29,10 @@ public abstract class NegativeCheckTest {
 	@Parameters
 	public static List<Object[]> data() {
 		return Arrays.asList(new Object[][]{
+				{NegativeCheckLevel.PERMISSIVE, Scope.NONE, Scope.PUBLIC, false},
+				{NegativeCheckLevel.PERMISSIVE, Scope.NONE, Scope.PROTECTED, false},
+				{NegativeCheckLevel.PERMISSIVE, Scope.NONE, Scope.DEFAULT, false},
+				{NegativeCheckLevel.PERMISSIVE, Scope.NONE, Scope.PRIVATE, false},
 				{NegativeCheckLevel.PERMISSIVE, Scope.PRIVATE, Scope.PUBLIC, true},
 				{NegativeCheckLevel.PERMISSIVE, Scope.PRIVATE, Scope.PROTECTED, true},
 				{NegativeCheckLevel.PERMISSIVE, Scope.PRIVATE, Scope.DEFAULT, true},

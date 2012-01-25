@@ -27,7 +27,7 @@ Just write this in your pom.xml.
 This feature injects a code like `if (arg == null) {throw new IllegalArgumentException("...");}`.
 This feature has 3 configurations.
 
-1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE)
+1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE, NONE)
 2. null check level (STRICT, PERMISSIVE)
 3. exception which will be thrown
 
@@ -63,7 +63,7 @@ Default value is `java.lang.IllegalArgumentException`.
 This feature injects a code like `if (arg < 0) {throw new IllegalArgumentException("...");}`.
 This feature has 2 configurations.
 
-1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE)
+1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE, NONE)
 2. exception which will be thrown
 
 You can write them in your pom.xml. For example:
@@ -95,6 +95,8 @@ Default value is `java.lang.IllegalArgumentException`.
 ## 0.2
 - supported negative check feature with @Nonnegative annotation
 
+## 0.3
+- added `NONE` to scope
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)

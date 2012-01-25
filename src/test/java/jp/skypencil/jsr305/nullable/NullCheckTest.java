@@ -29,6 +29,10 @@ public class NullCheckTest {
 	@Parameters
 	public static List<Object[]> data() {
 		return Arrays.asList(new Object[][]{
+				{NullCheckLevel.PERMISSIVE, Scope.NONE, Scope.PRIVATE, false, false},
+				{NullCheckLevel.PERMISSIVE, Scope.NONE, Scope.DEFAULT, false, false},
+				{NullCheckLevel.PERMISSIVE, Scope.NONE, Scope.PROTECTED, false, false},
+				{NullCheckLevel.PERMISSIVE, Scope.NONE, Scope.PUBLIC, false, false},
 				{NullCheckLevel.PERMISSIVE, Scope.PRIVATE, Scope.PRIVATE, true, false},
 				{NullCheckLevel.PERMISSIVE, Scope.PRIVATE, Scope.DEFAULT, true, false},
 				{NullCheckLevel.PERMISSIVE, Scope.PRIVATE, Scope.PROTECTED, true, false},
@@ -45,6 +49,10 @@ public class NullCheckTest {
 				{NullCheckLevel.PERMISSIVE, Scope.PUBLIC, Scope.DEFAULT, false, false},
 				{NullCheckLevel.PERMISSIVE, Scope.PUBLIC, Scope.PROTECTED, false, false},
 				{NullCheckLevel.PERMISSIVE, Scope.PUBLIC, Scope.PUBLIC, true, false},
+				{NullCheckLevel.STRICT, Scope.NONE, Scope.PRIVATE, false, false},
+				{NullCheckLevel.STRICT, Scope.NONE, Scope.DEFAULT, false, false},
+				{NullCheckLevel.STRICT, Scope.NONE, Scope.PROTECTED, false, false},
+				{NullCheckLevel.STRICT, Scope.NONE, Scope.PUBLIC, false, false},
 				{NullCheckLevel.STRICT, Scope.PRIVATE, Scope.PRIVATE, true, true},
 				{NullCheckLevel.STRICT, Scope.PRIVATE, Scope.DEFAULT, true, true},
 				{NullCheckLevel.STRICT, Scope.PRIVATE, Scope.PROTECTED, true, true},
