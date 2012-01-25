@@ -88,7 +88,7 @@ public abstract class NegativeCheckTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(this.settingScope, this.level, exception);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting, null), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);

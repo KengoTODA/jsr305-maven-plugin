@@ -19,7 +19,8 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 
 	public MavenJSR305ClassVisitor(int api, ClassVisitor inner,
 			@Nullable jp.skypencil.jsr305.nullable.Setting nullCheckSetting,
-			@Nullable jp.skypencil.jsr305.negative.Setting nonnegativeCheckSetting) {
+			@Nullable jp.skypencil.jsr305.negative.Setting nonnegativeCheckSetting,
+			@Nullable jp.skypencil.jsr305.regex.Setting setting) {
 		super(api, inner);
 		this.nullCheckSetting = nullCheckSetting;
 		this.nonnegativeCheckSetting = nonnegativeCheckSetting;

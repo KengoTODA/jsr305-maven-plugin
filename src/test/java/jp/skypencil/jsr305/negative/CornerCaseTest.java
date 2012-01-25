@@ -64,7 +64,7 @@ public class CornerCaseTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(Scope.PRIVATE, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting, null), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
@@ -76,7 +76,7 @@ public class CornerCaseTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(Scope.PRIVATE, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting, null), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
@@ -86,7 +86,7 @@ public class CornerCaseTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(Scope.PUBLIC, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting, null), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
@@ -105,7 +105,7 @@ public class CornerCaseTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(Scope.PUBLIC, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting, null), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
@@ -124,7 +124,7 @@ public class CornerCaseTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(Scope.PUBLIC, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting, null), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
@@ -138,7 +138,7 @@ public class CornerCaseTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(Scope.PUBLIC, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting, null), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);

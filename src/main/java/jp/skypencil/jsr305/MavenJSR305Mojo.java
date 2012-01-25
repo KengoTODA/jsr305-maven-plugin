@@ -55,6 +55,8 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 */
 	protected jp.skypencil.jsr305.negative.Setting negativeCheck;
 
+	protected jp.skypencil.jsr305.regex.Setting regexCheck;
+
 	@Override
 	public void execute() throws MojoExecutionException {
 		getLog().info("Start to enhance...");
@@ -85,7 +87,7 @@ public class MavenJSR305Mojo extends AbstractMojo {
 
 					ClassReader reader = new ClassReader(binary);
 					ClassWriter writer = new ClassWriter(0);
-					reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck, negativeCheck), 0);
+					reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck, negativeCheck, regexCheck), 0);
 					byte[] enhanced = writer.toByteArray();
 					Files.write(enhanced, child);
 				}
