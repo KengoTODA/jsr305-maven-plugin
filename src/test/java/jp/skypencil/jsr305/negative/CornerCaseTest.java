@@ -58,6 +58,30 @@ public class CornerCaseTest {
 		testWithNegativeInfinity("jp/skypencil/jsr305/negative/EmptyStaticClass");
 	}
 
+	@Test
+	public void testAbstractMethod() throws Throwable {
+		String innerClassName = "jp/skypencil/jsr305/negative/AbstractClass";
+		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
+		ClassWriter writer = new ClassWriter(0);
+		Setting setting = new Setting(Scope.PRIVATE, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		byte[] classBinary = writer.toByteArray();
+
+		new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
+	}
+
+	@Test
+	public void testInterface() throws Throwable {
+		String innerClassName = "jp/skypencil/jsr305/negative/Interface";
+		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
+		ClassWriter writer = new ClassWriter(0);
+		Setting setting = new Setting(Scope.PRIVATE, NegativeCheckLevel.PERMISSIVE, IllegalArgumentException.class);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, setting), 0);
+		byte[] classBinary = writer.toByteArray();
+
+		new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
+	}
+
 	private void test(String innerClassName) throws Throwable {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
