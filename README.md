@@ -12,7 +12,7 @@ Just write this in your pom.xml.
     <plugin>
     	<groupId>jp.skypencil</groupId>
     	<artifactId>maven-jsr305-plugin</artifactId>
-    	<version>0.2</version>
+    	<version>0.3</version>
     	<executions>
     		<execution>
     			<goals>
@@ -60,7 +60,7 @@ Default value is `java.lang.IllegalArgumentException`.
 
 
 ## Negative check
-This feature injects a code like `if (arg < 0) {throw new IllegalArgumentException("...");}`.
+This feature injects a code like `if (arg < 0) {throw new IllegalArgumentException("...");}` for arguments annotated with @Nonnegative.
 This feature has 2 configurations.
 
 1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE, NONE)
@@ -78,7 +78,7 @@ You can write them in your pom.xml. For example:
 Please note that this feature handles NaN arguments as negative.
 
 ## Regex check
-This feature injects a code like `if (!Regex.matches(pattern, arg)) {throw new IllegalArgumentException("...");}`.
+This feature injects a code like `if (!Regex.matches(pattern, arg)) {throw new IllegalArgumentException("...");}` for arguments annotated with @MatchesPattern.
 This feature has 2 configurations.
 
 1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE, NONE)
