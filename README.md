@@ -77,15 +77,21 @@ You can write them in your pom.xml. For example:
 
 Please note that this feature handles NaN arguments as negative.
 
-### 1st configuration: target scope
-If you choose `PROTECTED` for target scope, check logics will be injected to `public` and `protected` methods
-including constructors.
-If you choose `PUBLIC`, check logics will be injected to only `public` methods including constructors.
-Default value is `PUBLIC`.
+## Regex check
+This feature injects a code like `if (!Regex.matches(pattern, arg)) {throw new IllegalArgumentException("...");}`.
+This feature has 2 configurations.
 
-### 2nd configuration: exception which will be thrown
-You can specify an exception which has a constructor with a String argument.
-Default value is `java.lang.IllegalArgumentException`.
+1. target scope (PUBLIC, PROTECTED, DEFAULT, PRIVATE, NONE)
+2. exception which will be thrown
+
+You can write them in your pom.xml. For example:
+
+    <configuration>
+    	<regexCheck>
+    		<targetScope>DEFAULT</targetScope>
+    		<exception>java.lang.IllegalArgumentException</exception>
+    	</regexCheck>
+    </configuration>
 
 
 # History
@@ -98,6 +104,7 @@ Default value is `java.lang.IllegalArgumentException`.
 ## 0.3
 - added `NONE` to scope
 - started to build on cloudbees
+- supported regex check feature with @MatchesPattern annotation
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)

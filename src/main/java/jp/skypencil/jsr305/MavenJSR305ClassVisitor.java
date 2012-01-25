@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import jp.skypencil.jsr305.negative.NegativeCheckMethodVisitor;
 import jp.skypencil.jsr305.nullable.NullCheckMethodVisitor;
+import jp.skypencil.jsr305.regex.MatchesPatternMethodVisitor;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -15,15 +16,17 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 	private static final String NAME_OF_CONSTRCTOR = "<init>";
 	private final jp.skypencil.jsr305.nullable.Setting nullCheckSetting;
 	private final jp.skypencil.jsr305.negative.Setting nonnegativeCheckSetting;
+	private final jp.skypencil.jsr305.regex.Setting regexSetting;
 	private boolean isEnum;
 
 	public MavenJSR305ClassVisitor(int api, ClassVisitor inner,
 			@Nullable jp.skypencil.jsr305.nullable.Setting nullCheckSetting,
 			@Nullable jp.skypencil.jsr305.negative.Setting nonnegativeCheckSetting,
-			@Nullable jp.skypencil.jsr305.regex.Setting setting) {
+			@Nullable jp.skypencil.jsr305.regex.Setting regexSetting) {
 		super(api, inner);
 		this.nullCheckSetting = nullCheckSetting;
 		this.nonnegativeCheckSetting = nonnegativeCheckSetting;
+		this.regexSetting = regexSetting;
 	}
 
 	@Override
@@ -48,6 +51,9 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		}
 		if (nonnegativeCheckSetting != null && nonnegativeCheckSetting.getTargetScope().contains(methodScope)) {
 			mv = new NegativeCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nonnegativeCheckSetting);
+		}
+		if (regexSetting != null && regexSetting.getTargetScope().contains(methodScope)) {
+			mv = new MatchesPatternMethodVisitor(api, mv, isStaticMethod, argumentTypes, regexSetting);
 		}
 
 		return mv;

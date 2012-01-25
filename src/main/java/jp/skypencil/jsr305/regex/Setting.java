@@ -2,18 +2,32 @@ package jp.skypencil.jsr305.regex;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import jp.skypencil.jsr305.Scope;
 
 public class Setting {
+	private Scope targetScope = Scope.PUBLIC;
+	private String exception = IllegalArgumentException.class.getName();
 
-	private final Scope settingScope;
-
-	public Setting(@Nonnull Scope settingScope) {
-		this.settingScope = settingScope;
+	public Setting() {
 	}
 
-	Scope getSettingScope() {
-		return settingScope;
+	@VisibleForTesting
+	Setting(@Nonnull Scope targetScope) {
+		this.targetScope = targetScope;
 	}
 
+	public Scope getTargetScope() {
+		return targetScope;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Class<? extends Throwable> getException() {
+		try {
+			return (Class<? extends Throwable>) Class.forName(exception);
+		} catch (ClassNotFoundException e) {
+			throw new AssertionError(e);
+		}
+	}
 }

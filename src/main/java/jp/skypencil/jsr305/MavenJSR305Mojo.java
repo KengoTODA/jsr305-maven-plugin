@@ -54,7 +54,9 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 * @required
 	 */
 	protected jp.skypencil.jsr305.negative.Setting negativeCheck;
-
+	/**
+	 * @parameter
+	 */
 	protected jp.skypencil.jsr305.regex.Setting regexCheck;
 
 	@Override
