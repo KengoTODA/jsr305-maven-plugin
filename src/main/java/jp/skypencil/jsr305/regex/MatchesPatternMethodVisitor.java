@@ -1,6 +1,7 @@
 package jp.skypencil.jsr305.regex;
 
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.MatchesPattern;
@@ -18,8 +19,11 @@ import com.google.common.collect.Maps;
 public class MatchesPatternMethodVisitor extends MethodVisitor {
 	private static final String TARGET_DESCRIPTOR = Type.getDescriptor(MatchesPattern.class);
 	private static final String INTERNAL_NAME_PATTERN = Type.getInternalName(Pattern.class);
+	private static final String INTERNAL_NAME_MATCHER = Type.getInternalName(Matcher.class);
 	private static final Type TYPE_STRING = Type.getType(String.class);
-	private static final String METHOD_DESCRIPTOR = Type.getMethodDescriptor(Type.BOOLEAN_TYPE, TYPE_STRING, Type.getType(CharSequence.class));
+	private static final String COMPILE_METHOD_DESCRIPTOR = Type.getMethodDescriptor(Type.getType(Pattern.class), TYPE_STRING, Type.INT_TYPE);
+	private static final String MATCHER_METHOD_DESCRIPTOR = Type.getMethodDescriptor(Type.getType(Matcher.class), Type.getType(CharSequence.class));
+	private static final String MATCHES_METHOD_DESCRIPTOR = Type.getMethodDescriptor(Type.BOOLEAN_TYPE);
 
 	private final boolean isStatic;
 	private final Type[] argumentTypes;
@@ -59,8 +63,11 @@ public class MatchesPatternMethodVisitor extends MethodVisitor {
 
 			Label afterCheck = new Label();
 			visitLdcInsn(pattern.pattern());
+			visitLdcInsn(pattern.flags());
+			visitMethodInsn(Opcodes.INVOKESTATIC, INTERNAL_NAME_PATTERN, "compile", COMPILE_METHOD_DESCRIPTOR);
 			visitVarInsn(Opcodes.ALOAD, localVarIndex);
-			visitMethodInsn(Opcodes.INVOKESTATIC, INTERNAL_NAME_PATTERN, "matches", METHOD_DESCRIPTOR);
+			visitMethodInsn(Opcodes.INVOKEVIRTUAL, INTERNAL_NAME_PATTERN, "matcher", MATCHER_METHOD_DESCRIPTOR);
+			visitMethodInsn(Opcodes.INVOKEVIRTUAL, INTERNAL_NAME_MATCHER, "matches", MATCHES_METHOD_DESCRIPTOR);
 			visitJumpInsn(Opcodes.IFNE, afterCheck);
 
 			visitTypeInsn(Opcodes.NEW, internalNameOfException);

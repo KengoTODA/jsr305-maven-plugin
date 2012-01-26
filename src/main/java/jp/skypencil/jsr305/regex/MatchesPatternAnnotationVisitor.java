@@ -6,7 +6,7 @@ import org.objectweb.asm.AnnotationVisitor;
 
 class MatchesPatternAnnotationVisitor extends AnnotationVisitor {
 	private static final String REGEX_NAME = "value";
-	private static final String FLAG_NAME = "flag";
+	private static final String FLAG_NAME = "flags";
 	private int flag = 0;
 	private String regex;
 	private Pattern pattern;
