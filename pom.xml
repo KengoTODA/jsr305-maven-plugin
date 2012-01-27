@@ -9,6 +9,7 @@
 	<description>a Maven plugin which injects precondition check logics to your classes.</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.pmd.targetjdk>1.6</maven.pmd.targetjdk>
 	</properties>
 	<scm>
 		<connection>scm:git://github.com/eller86/maven-jsr305-plugin.git</connection>
@@ -43,6 +44,24 @@
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.1.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<linkXRef>false</linkXRef>
+					<sourceEncoding>UTF-8</sourceEncoding>
+					<targetJdk>1.6</targetJdk>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+						<ruleset>/rulesets/braces.xml</ruleset>
+						<ruleset>/rulesets/naming.xml</ruleset>
+						<ruleset>/rulesets/strings.xml</ruleset>
+						<ruleset>/rulesets/migrating.xml</ruleset>
+						<ruleset>/rulesets/strings.xml</ruleset>
+					</rulesets>
+				</configuration>
 			</plugin>
 		</plugins>
 		<extensions>
