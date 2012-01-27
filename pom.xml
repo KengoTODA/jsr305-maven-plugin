@@ -5,7 +5,7 @@
 	<packaging>maven-plugin</packaging>
 	<name>maven-jsr305-plugin Maven Mojo</name>
 	<url>http://maven.apache.org</url>
-	<version>0.4-SNAPSHOT</version>
+	<version>1.0</version>
 	<description>a Maven plugin which injects precondition check logics to your classes.</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
