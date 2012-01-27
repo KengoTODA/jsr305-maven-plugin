@@ -4,23 +4,39 @@ a Maven plugin which injects precondition check logics to your classes.
 ![built and tested on DEV@cloud](http://static-www.cloudbees.com/images/badges/BuiltOnDEV.png)
 
 ## about jsr305
- - http://jcp.org/en/jsr/detail?id=305
+ - http://code.google.com/p/jsr-305/
 
 # how to use
 Just write this in your pom.xml.
 
-    <plugin>
-    	<groupId>jp.skypencil</groupId>
-    	<artifactId>maven-jsr305-plugin</artifactId>
-    	<version>0.3</version>
-    	<executions>
-    		<execution>
-    			<goals>
-    				<goal>enhance</goal>
-    			</goals>
-    		</execution>
-    	</executions>
-    </plugin>
+    <build>
+    	<plugins>
+    		<plugin>
+    			<groupId>jp.skypencil</groupId>
+    			<artifactId>maven-jsr305-plugin</artifactId>
+    			<version>1.0</version>
+    			<executions>
+    				<execution>
+    					<goals>
+    						<goal>enhance</goal>
+    					</goals>
+    					<configurations>
+    						...
+    					</configurations>
+    				</execution>
+    			</executions>
+    		</plugin>
+    		...
+    	</plugins>
+    	...
+    </build>
+    <pluginRepositories>
+    	<pluginRepository>
+    		<!-- repository for maven-jsr305-plugin -->
+    		<id>release.skypencil.forge.cloudbees.com</id>
+    		<url>http://repository-skypencil.forge.cloudbees.com/release/</url>
+    	</pluginRepository>
+    </pluginRepositories>
 
 # features
 ## Null check
@@ -105,6 +121,12 @@ You can write them in your pom.xml. For example:
 - added `NONE` to scope
 - started to build on cloudbees
 - supported regex check feature with @MatchesPattern annotation
+
+## 1.0
+- fixed some bugs
+- enhance code coverage
+- update documents
+
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)
