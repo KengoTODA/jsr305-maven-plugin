@@ -5,7 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.MatchesPattern;
-import javax.annotation.Nonnegative;
+
+import jp.skypencil.jsr305.OrdinalBuilder;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Label;
@@ -13,7 +14,6 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 
 public class MatchesPatternMethodVisitor extends MethodVisitor {
@@ -72,22 +72,11 @@ public class MatchesPatternMethodVisitor extends MethodVisitor {
 
 			visitTypeInsn(Opcodes.NEW, internalNameOfException);
 			visitInsn(Opcodes.DUP);
-			visitLdcInsn("given String for " + createOrdinal(parameter) + " parameter doesn't match the pattern (" + pattern.pattern() + ")");
+			visitLdcInsn("given String for " + OrdinalBuilder.valueOf(parameter) + " parameter doesn't match the pattern (" + pattern.pattern() + ")");
 			visitMethodInsn(Opcodes.INVOKESPECIAL, internalNameOfException, "<init>", "(Ljava/lang/String;)V");
 
 			visitInsn(Opcodes.ATHROW);
 			visitLabel(afterCheck);
-		}
-	}
-
-	@VisibleForTesting
-	String createOrdinal(@Nonnegative int index) {
-		assert index >= 0;
-		switch (index) {
-			case 1: return "1st";
-			case 2: return "2nd";
-			case 3: return "3rd";
-			default: return index + "th";
 		}
 	}
 

@@ -3,14 +3,13 @@ package jp.skypencil.jsr305.negative;
 
 import javax.annotation.Nonnegative;
 
+import jp.skypencil.jsr305.OrdinalBuilder;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
-
-import com.google.common.annotations.VisibleForTesting;
 
 public final class NegativeCheckMethodVisitor extends MethodVisitor {
 	private final NegativeCheckStrategyFactory factory;
@@ -91,22 +90,11 @@ public final class NegativeCheckMethodVisitor extends MethodVisitor {
 
 		visitTypeInsn(Opcodes.NEW, Type.getInternalName(exception));
 		visitInsn(Opcodes.DUP);
-		visitLdcInsn("you cannot give a null value to " + createOrdinal(index) + " parameter (" + argumentTypes[index].getClassName() + "), because " + factory.getReason());
+		visitLdcInsn("you cannot give a null value to " + OrdinalBuilder.valueOf(index) + " parameter (" + argumentTypes[index].getClassName() + "), because " + factory.getReason());
 		visitMethodInsn(Opcodes.INVOKESPECIAL, Type.getInternalName(exception), "<init>", "(Ljava/lang/String;)V");
 
 		visitInsn(Opcodes.ATHROW);
 		visitLabel(afterCheck);
-	}
-
-	@VisibleForTesting
-	String createOrdinal(@Nonnegative int index) {
-		assert index >= 0;
-		switch (index) {
-			case 1: return "1st";
-			case 2: return "2nd";
-			case 3: return "3rd";
-			default: return index + "th";
-		}
 	}
 
 	@Override
