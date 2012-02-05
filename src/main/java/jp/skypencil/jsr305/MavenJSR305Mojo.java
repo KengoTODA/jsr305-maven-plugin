@@ -28,7 +28,7 @@ import org.objectweb.asm.Opcodes;
 import com.google.common.io.Files;
 
 /**
- * enhance null check codes
+ * enhance check codes
  * 
  * @goal enhance
  * @phase process-classes
@@ -45,14 +45,40 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 */
 	protected File classesDirectory;
 	/**
+	 * Setting for null check. default is:
+	 *
+	 * <pre>&lt;configuration&gt;
+	 *   &lt;nullCheck&gt;
+	 *     &lt;targetScope&gt;PUBLIC&lt;/targetScope&gt;
+	 *     &lt;level&gt;PERMISSIVE&lt;/level&gt;
+	 *   &lt;exception&gt;java.lang.IllegalArgumentException&lt;/exception&gt;
+	 * &lt;/nullCheck&gt;
+	 * &lt;/configuration&gt;</pre>
+	 * 
 	 * @parameter
 	 */
 	protected jp.skypencil.jsr305.nullable.Setting nullCheck;
 	/**
+	 * Setting for negative check. default is:
+	 * <pre>&lt;configuration&gt;
+	 *   &lt;negativeCheck&gt;
+	 *     &lt;targetScope&gt;PUBLIC&lt;/targetScope&gt;
+	 *     &lt;exception&gt;java.lang.IllegalArgumentException&lt;/exception&gt;
+	 *   &lt;/negativeCheck&gt;
+	 * &lt;/configuration&gt;</pre>
+	 * 
 	 * @parameter
 	 */
 	protected jp.skypencil.jsr305.negative.Setting negativeCheck;
 	/**
+	 * Setting for regex check. default is:
+	 * <pre>&lt;configuration&gt;
+	 *   &lt;regexCheck&gt;
+	 *     &lt;targetScope&gt;PUBLIC&lt;/targetScope&gt;
+	 *     &lt;exception&gt;java.lang.IllegalArgumentException&lt;/exception&gt;
+	 *   &lt;/regexCheck&gt;
+	 * &lt;/configuration&gt;</pre>
+	 * 
 	 * @parameter
 	 */
 	protected jp.skypencil.jsr305.regex.Setting regexCheck;
