@@ -45,4 +45,9 @@ class StrictStrategyFactory implements NullCheckStrategyFactory {
 	public String getReason() {
 		return "this param isn't annotated with javax.annotation.Nullable";
 	}
+
+	@Override
+	public void markAsNonnullByDefault() {
+		// Noting to do
+	}
 }

@@ -13,14 +13,20 @@ public class NullCheckMethodVisitor extends MethodVisitor {
 	private final NullCheckStrategyFactory factory;
 	private final boolean isStaticMethod;
 	private final Type[] argumentTypes;
-	private Class<? extends Throwable> exception;
+	private final Class<? extends Throwable> exception;
+	private final NullCheckLevel level;
 
-	public NullCheckMethodVisitor(int api, MethodVisitor inner, boolean isStatic, Type[] argumentTypes, Setting setting) {
+	public NullCheckMethodVisitor(int api, MethodVisitor inner, boolean isStatic, Type[] argumentTypes, Setting setting, boolean nonnullByDefault) {
 		super(api, inner);
-		this.factory = setting.getLevel().createFactory(argumentTypes.length);
+		this.level = setting.getLevel();
 		this.isStaticMethod = isStatic;
 		this.argumentTypes = argumentTypes;
 		this.exception = setting.getException();
+
+		this.factory = level.createFactory(argumentTypes.length);
+		if (nonnullByDefault) {
+			this.factory.markAsNonnullByDefault();
+		}
 	}
 
 	@Override

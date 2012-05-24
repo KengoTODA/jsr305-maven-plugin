@@ -4,7 +4,7 @@ public enum NullCheckLevel {
 	PERMISSIVE {
 		@Override
 		NullCheckStrategyFactory createFactory(int arguments) {
-			return new PermissiveStrategyFactory();
+			return new PermissiveStrategyFactory(arguments);
 		}
 	},
 	STRICT {

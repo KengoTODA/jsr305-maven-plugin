@@ -1,11 +1,13 @@
 package jp.skypencil.jsr305;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import jp.skypencil.jsr305.negative.NegativeCheckMethodVisitor;
 import jp.skypencil.jsr305.nullable.NullCheckMethodVisitor;
 import jp.skypencil.jsr305.regex.MatchesPatternMethodVisitor;
 
+import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -18,6 +20,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 	private final jp.skypencil.jsr305.negative.Setting nonnegativeCheckSetting;
 	private final jp.skypencil.jsr305.regex.Setting regexSetting;
 	private boolean isEnum;
+	private boolean nonnullByDefault;
 
 	public MavenJSR305ClassVisitor(int api, ClassVisitor inner,
 			@Nullable jp.skypencil.jsr305.nullable.Setting nullCheckSetting,
@@ -36,6 +39,13 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		isEnum = DESCRIPTION_OF_ENUM.equals(superName);
 	}
 
+	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+		if (desc.equals(Type.getDescriptor(ParametersAreNonnullByDefault.class))) {
+			this.nonnullByDefault = true;
+		}
+		return super.visitAnnotation(desc, visible);
+	}
+
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc,
 			@Nullable String signature, @Nullable String[] exceptions) {
@@ -47,7 +57,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		if (isEnum && NAME_OF_CONSTRCTOR.equals(name)) {
 			// don't inject to constructors of Enum, because it gets null always
 		} else if (nullCheckSetting != null && nullCheckSetting.getTargetScope().contains(methodScope)) {
-			mv = new NullCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nullCheckSetting);
+			mv = new NullCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nullCheckSetting, this.nonnullByDefault);
 		}
 		if (nonnegativeCheckSetting != null && nonnegativeCheckSetting.getTargetScope().contains(methodScope)) {
 			mv = new NegativeCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nonnegativeCheckSetting);
