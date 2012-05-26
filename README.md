@@ -127,6 +127,9 @@ You can write them in your pom.xml. For example:
 - enhance code coverage
 - update documents
 
+## 1.1
+- supported @ParametersAreNonnullByDefault
+
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)
