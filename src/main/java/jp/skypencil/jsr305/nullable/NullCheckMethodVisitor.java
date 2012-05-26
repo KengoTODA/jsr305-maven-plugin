@@ -1,5 +1,7 @@
 package jp.skypencil.jsr305.nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import jp.skypencil.jsr305.OrdinalBuilder;
 
 import org.objectweb.asm.AnnotationVisitor;
@@ -9,7 +11,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 public class NullCheckMethodVisitor extends MethodVisitor {
-
+	private static final String DESC_PARAMETERS_NONNULL_BY_DEFAULT = Type.getDescriptor(ParametersAreNonnullByDefault.class);
 	private final NullCheckStrategyFactory factory;
 	private final boolean isStaticMethod;
 	private final Type[] argumentTypes;
@@ -27,6 +29,14 @@ public class NullCheckMethodVisitor extends MethodVisitor {
 		if (nonnullByDefault) {
 			this.factory.markAsNonnullByDefault();
 		}
+	}
+
+	@Override
+	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+		if (desc.equals(DESC_PARAMETERS_NONNULL_BY_DEFAULT)) {
+			this.factory.markAsNonnullByDefault();
+		}
+		return super.visitAnnotation(desc, visible);
 	}
 
 	@Override
