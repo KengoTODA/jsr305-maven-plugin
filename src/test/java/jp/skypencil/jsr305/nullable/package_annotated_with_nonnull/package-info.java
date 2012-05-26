@@ -1,0 +1,4 @@
+@ParametersAreNonnullByDefault
+package jp.skypencil.jsr305.nullable.package_annotated_with_nonnull;
+
+import javax.annotation.ParametersAreNonnullByDefault;
