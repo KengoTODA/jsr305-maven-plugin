@@ -29,4 +29,9 @@ public class NonnullByDefaultTest extends AbstractTest {
 	public void testAnnotatedClass() throws Throwable {
 		test("jp/skypencil/jsr305/nullable/NonnullByDefaultClass", IllegalArgumentException.class);
 	}
+
+	@Test
+	public void testAnnotatedMethod() throws Throwable {
+		test("jp/skypencil/jsr305/nullable/NonnullByDefaultMethod", IllegalArgumentException.class);
+	}
 }
