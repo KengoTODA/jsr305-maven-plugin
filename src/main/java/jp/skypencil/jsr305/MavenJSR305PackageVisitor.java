@@ -48,7 +48,7 @@ final class MavenJSR305PackageVisitor {
 	private PackageInfo loadInfo(File directory, Log log) throws IOException {
 		File packageInfo = new File(directory, "package-info.class");
 		if (!packageInfo.exists() || !packageInfo.isFile()) {
-			return new PackageInfo();
+			return new PackageInfo(false);
 		}
 
 		byte[] binary = Files.toByteArray(packageInfo);
