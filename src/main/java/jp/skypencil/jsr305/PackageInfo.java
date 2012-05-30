@@ -7,7 +7,7 @@ public final class PackageInfo {
 		this.nonnullByDefault = nonnullByDefault;
 	}
 
-	boolean isNonnullByDefault() {
+	public boolean isNonnullByDefault() {
 		return nonnullByDefault;
 	}
 }

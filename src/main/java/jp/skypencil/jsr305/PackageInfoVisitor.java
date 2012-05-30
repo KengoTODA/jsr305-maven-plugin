@@ -8,11 +8,11 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Type;
 
 @ParametersAreNonnullByDefault
-final class PackageInfoVisitor extends ClassVisitor {
+public final class PackageInfoVisitor extends ClassVisitor {
 	private static final String TARGET_DESC = Type.getDescriptor(ParametersAreNonnullByDefault.class);
 	private boolean parameterIsNonnullByDefault;
 
-	PackageInfoVisitor(int api, ClassWriter writer) {
+	public PackageInfoVisitor(int api, ClassWriter writer) {
 		super(api, writer);
 	}
 
@@ -24,7 +24,7 @@ final class PackageInfoVisitor extends ClassVisitor {
 		return super.visitAnnotation(desc, visible);
 	}
 
-	PackageInfo getInfo() {
+	public PackageInfo getInfo() {
 		return new PackageInfo(parameterIsNonnullByDefault);
 	}
 }
