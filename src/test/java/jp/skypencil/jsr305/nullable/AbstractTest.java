@@ -14,8 +14,6 @@ import javax.annotation.Nullable;
 import jp.skypencil.jsr305.MavenJSR305PackageVisitor;
 import jp.skypencil.jsr305.Scope;
 
-import org.apache.maven.plugin.logging.SystemStreamLog;
-
 import com.google.common.io.Files;
 
 abstract class AbstractTest {
@@ -49,7 +47,7 @@ abstract class AbstractTest {
 
 	protected void test(String innerClassName, Class<? extends Throwable> exception) throws Throwable {
 		Setting setting = new Setting(this.settingScope, this.level, exception);
-		new MavenJSR305PackageVisitor(setting, null, null).visitPackage(copiedFiles, new SystemStreamLog());
+		new MavenJSR305PackageVisitor(setting, null, null).visitPackage(copiedFiles, new BlackholeLog());
 
 		File injectedClassFile = new File(copiedFiles, innerClassName + ".class");
 		byte[] classBinary = Files.toByteArray(injectedClassFile);
