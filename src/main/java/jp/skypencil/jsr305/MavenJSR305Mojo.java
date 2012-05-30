@@ -21,11 +21,6 @@ import java.io.IOException;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
-
-import com.google.common.io.Files;
 
 /**
  * enhance check codes
@@ -91,42 +86,10 @@ public class MavenJSR305Mojo extends AbstractMojo {
 		}
 
 		try {
-			enhance(classesDirectory);
+			new MavenJSR305PackageVisitor(nullCheck, negativeCheck, regexCheck).visitPackage(classesDirectory, getLog());
 		} catch (IOException e) {
-			throw new MojoExecutionException("A inner exception occurs", e);
-		} catch (ClassNotFoundException e) {
 			throw new MojoExecutionException("A inner exception occurs", e);
 		}
 		getLog().info("finished.");
-	}
-
-	private void enhance(File dir) throws IOException, ClassNotFoundException {
-		for (File child : dir.listFiles()) {
-			if (child.isDirectory()) {
-				enhance(child);
-			} else {
-				if (Files.getFileExtension(child.getName()).equals("class")) {
-					getLog().debug("inject to " + child.getAbsolutePath());
-					byte[] binary = Files.toByteArray(child);
-					int majorVersionOfClassFileFormat = binary[6] << 8 | binary[7];
-					int api = apiFor(majorVersionOfClassFileFormat);
-
-					ClassReader reader = new ClassReader(binary);
-					ClassWriter writer = new ClassWriter(0);
-					reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck, negativeCheck, regexCheck), 0);
-					byte[] enhanced = writer.toByteArray();
-					Files.write(enhanced, child);
-				}
-			}
-		}
-	}
-
-	private int apiFor(int majorVersionOfClassFileFormat) {
-		switch (majorVersionOfClassFileFormat) {
-			case 51: return Opcodes.V1_7;
-			case 50: return Opcodes.V1_6;
-			case 49: return Opcodes.V1_5;
-		}
-		throw new RuntimeException("unknown major version: " + majorVersionOfClassFileFormat);
 	}
 }
