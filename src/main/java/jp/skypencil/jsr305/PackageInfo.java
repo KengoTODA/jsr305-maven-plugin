@@ -1,9 +1,9 @@
 package jp.skypencil.jsr305;
 
-final class PackageInfo {
+public final class PackageInfo {
 	private boolean nonnullByDefault;
 
-	PackageInfo(boolean nonnullByDefault) {
+	public PackageInfo(boolean nonnullByDefault) {
 		this.nonnullByDefault = nonnullByDefault;
 	}
 

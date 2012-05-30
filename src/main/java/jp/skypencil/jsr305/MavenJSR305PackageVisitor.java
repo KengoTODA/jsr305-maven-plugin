@@ -70,7 +70,7 @@ final class MavenJSR305PackageVisitor {
 
 		ClassReader reader = new ClassReader(binary);
 		ClassWriter writer = new ClassWriter(0);
-		reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck, negativeCheck, regexCheck), 0);
+		reader.accept(new MavenJSR305ClassVisitor(api, writer, nullCheck, negativeCheck, regexCheck, info), 0);
 		byte[] enhanced = writer.toByteArray();
 		Files.write(enhanced, classFile);
 	}

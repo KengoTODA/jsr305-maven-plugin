@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import jp.skypencil.jsr305.MavenJSR305ClassVisitor;
+import jp.skypencil.jsr305.PackageInfo;
 import jp.skypencil.jsr305.Scope;
 
 import org.junit.Test;
@@ -73,7 +74,7 @@ public class MatchesPatternTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(this.settingScope);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, null, setting), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, null, setting, new PackageInfo(false)), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);

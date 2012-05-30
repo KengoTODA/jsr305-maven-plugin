@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import jp.skypencil.jsr305.MavenJSR305ClassVisitor;
+import jp.skypencil.jsr305.PackageInfo;
 import jp.skypencil.jsr305.Scope;
 
 import org.objectweb.asm.ClassReader;
@@ -37,7 +38,7 @@ abstract class AbstractTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(this.settingScope, this.level, exception);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, setting, null, null), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, setting, null, null, new PackageInfo(false)), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);

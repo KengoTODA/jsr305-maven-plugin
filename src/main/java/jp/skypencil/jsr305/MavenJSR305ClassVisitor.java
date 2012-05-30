@@ -1,5 +1,8 @@
 package jp.skypencil.jsr305;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -25,11 +28,13 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 	public MavenJSR305ClassVisitor(int api, ClassVisitor inner,
 			@Nullable jp.skypencil.jsr305.nullable.Setting nullCheckSetting,
 			@Nullable jp.skypencil.jsr305.negative.Setting nonnegativeCheckSetting,
-			@Nullable jp.skypencil.jsr305.regex.Setting regexSetting) {
+			@Nullable jp.skypencil.jsr305.regex.Setting regexSetting,
+			@Nonnull PackageInfo info) {
 		super(api, inner);
 		this.nullCheckSetting = nullCheckSetting;
 		this.nonnegativeCheckSetting = nonnegativeCheckSetting;
 		this.regexSetting = regexSetting;
+		this.nonnullByDefault = checkNotNull(info).isNonnullByDefault();
 	}
 
 	@Override
