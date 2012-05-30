@@ -12,9 +12,9 @@
 		<maven.pmd.targetjdk>1.6</maven.pmd.targetjdk>
 	</properties>
 	<scm>
-		<connection>scm:git://github.com/eller86/maven-jsr305-plugin.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/eller86/maven-jsr305-plugin.git</developerConnection>
-		<url>https://github.com/eller86/maven-jsr305-plugin</url>
+		<connection>scm:git://github.com/eller86/jsr305-maven-plugin.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/eller86/jsr305-maven-plugin.git</developerConnection>
+		<url>https://github.com/eller86/jsr305-maven-plugin</url>
 	</scm>
 	<developers>
 		<developer>
