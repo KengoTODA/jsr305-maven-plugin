@@ -1,5 +1,6 @@
 package jp.skypencil.jsr305.nullable;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class NullCheckTest extends AbstractTest {
 		});
 	}
 
-	public NullCheckTest(NullCheckLevel level, Scope settingScope, Scope targetScope, boolean nonnullIsTarget, boolean defaultIsTarget) {
+	public NullCheckTest(NullCheckLevel level, Scope settingScope, Scope targetScope, boolean nonnullIsTarget, boolean defaultIsTarget) throws IOException {
 		super(level, settingScope, targetScope, nonnullIsTarget, defaultIsTarget);
 	}
 

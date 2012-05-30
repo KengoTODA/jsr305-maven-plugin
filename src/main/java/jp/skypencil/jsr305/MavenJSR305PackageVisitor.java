@@ -16,12 +16,12 @@ import org.objectweb.asm.Opcodes;
 import com.google.common.io.Files;
 
 @ParametersAreNonnullByDefault
-final class MavenJSR305PackageVisitor {
+public final class MavenJSR305PackageVisitor {
 	private final jp.skypencil.jsr305.nullable.Setting nullCheck;
 	private final jp.skypencil.jsr305.negative.Setting negativeCheck;
 	private final jp.skypencil.jsr305.regex.Setting regexCheck;
 
-	MavenJSR305PackageVisitor(
+	public MavenJSR305PackageVisitor(
 			jp.skypencil.jsr305.nullable.Setting nullCheck,
 			jp.skypencil.jsr305.negative.Setting negativeCheck,
 			jp.skypencil.jsr305.regex.Setting regexCheck) {
@@ -30,7 +30,7 @@ final class MavenJSR305PackageVisitor {
 		this.regexCheck = regexCheck;
 	}
 
-	void visitPackage(final File directory, final Log log) throws IOException {
+	public void visitPackage(final File directory, final Log log) throws IOException {
 		checkNotNull(directory);
 		checkNotNull(log);
 		checkArgument(directory.isDirectory());

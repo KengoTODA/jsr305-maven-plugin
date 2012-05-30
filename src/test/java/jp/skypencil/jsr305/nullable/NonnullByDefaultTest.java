@@ -1,6 +1,7 @@
 package jp.skypencil.jsr305.nullable;
 
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class NonnullByDefaultTest extends AbstractTest {
 		});
 	}
 
-	public NonnullByDefaultTest(NullCheckLevel level) {
+	public NonnullByDefaultTest(NullCheckLevel level) throws IOException {
 		super(level, Scope.PUBLIC, Scope.PUBLIC, true, true);
 	}
 

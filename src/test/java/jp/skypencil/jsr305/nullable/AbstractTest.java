@@ -3,21 +3,20 @@ package jp.skypencil.jsr305.nullable;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import jp.skypencil.jsr305.MavenJSR305ClassVisitor;
-import jp.skypencil.jsr305.PackageInfo;
+import jp.skypencil.jsr305.MavenJSR305PackageVisitor;
 import jp.skypencil.jsr305.Scope;
 
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
+import org.apache.maven.plugin.logging.SystemStreamLog;
 
-import com.google.common.io.Resources;
+import com.google.common.io.Files;
 
 abstract class AbstractTest {
 	private final NullCheckLevel level;
@@ -25,23 +24,36 @@ abstract class AbstractTest {
 	private final Scope targetScope;
 	private final boolean nonnullIsTarget;
 	private final boolean defaultIsTarget;
+	private final File copiedFiles = Files.createTempDir();
 
-	AbstractTest(NullCheckLevel level, Scope settingScope, Scope targetScope, boolean nonnullIsTarget, boolean defaultIsTarget) {
+	AbstractTest(NullCheckLevel level, Scope settingScope, Scope targetScope, boolean nonnullIsTarget, boolean defaultIsTarget) throws IOException {
 		this.level = level;
 		this.settingScope = settingScope;
 		this.targetScope = targetScope;
 		this.nonnullIsTarget = nonnullIsTarget;
 		this.defaultIsTarget = defaultIsTarget;
+		recursiveCopy(new File("target/test-classes"), copiedFiles);
+	}
+
+	private void recursiveCopy(File source, File targetDirectory) throws IOException {
+		for (File child : source.listFiles()) {
+			File target = new File(targetDirectory, child.getName());
+			if (child.isDirectory()) {
+				target.mkdir();
+				recursiveCopy(child, target);
+			} else {
+				Files.copy(child, target);
+			}
+		}
 	}
 
 	protected void test(String innerClassName, Class<? extends Throwable> exception) throws Throwable {
-		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
-		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(this.settingScope, this.level, exception);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, setting, null, null, new PackageInfo(false)), 0);
-		byte[] classBinary = writer.toByteArray();
+		new MavenJSR305PackageVisitor(setting, null, null).visitPackage(copiedFiles, new SystemStreamLog());
 
-		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);
+		File injectedClassFile = new File(copiedFiles, innerClassName + ".class");
+		byte[] classBinary = Files.toByteArray(injectedClassFile);
+		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary );
 		Object instance = clazz.newInstance();
 
 		Method method = clazz.getDeclaredMethod(createMethodNameWith(Nonnull.class), Object.class);
