@@ -1,4 +1,4 @@
-# maven-jsr305-plugin
+# jsr305-maven-plugin
 a Maven plugin which injects precondition check logics to your classes.
 
 ![built and tested on DEV@cloud](http://static-www.cloudbees.com/images/badges/BuiltOnDEV.png)
@@ -13,8 +13,8 @@ Just write this in your pom.xml.
     	<plugins>
     		<plugin>
     			<groupId>jp.skypencil</groupId>
-    			<artifactId>maven-jsr305-plugin</artifactId>
-    			<version>1.0</version>
+    			<artifactId>jsr305-maven-plugin</artifactId>
+    			<version>1.1-SNAPSHOT</version>
     			<executions>
     				<execution>
     					<goals>
@@ -32,7 +32,7 @@ Just write this in your pom.xml.
     </build>
     <pluginRepositories>
     	<pluginRepository>
-    		<!-- repository for maven-jsr305-plugin -->
+    		<!-- repository for jsr305-maven-plugin -->
     		<id>release.skypencil.forge.cloudbees.com</id>
     		<url>http://repository-skypencil.forge.cloudbees.com/release/</url>
     	</pluginRepository>

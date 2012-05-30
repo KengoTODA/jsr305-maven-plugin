@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.skypencil</groupId>
-	<artifactId>maven-jsr305-plugin</artifactId>
+	<artifactId>jsr305-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<name>maven-jsr305-plugin Maven Mojo</name>
+	<name>jsr305-maven-plugin Maven Mojo</name>
 	<url>http://maven.apache.org</url>
 	<version>1.1-SNAPSHOT</version>
 	<description>a Maven plugin which injects precondition check logics to your classes.</description>
