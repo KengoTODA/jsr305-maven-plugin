@@ -19,12 +19,14 @@ import com.google.common.io.Files;
 public class PackageInfoVisitorTest {
 
 	@Test
-	public void testWithAnnotation() throws IOException {
+	public void testWithNonnullAnnotation() throws IOException {
 		assertThat(visit("jp.skypencil.jsr305.nullable.package_annotated_with_nonnull").isNonnullByDefault(), is(true));
+		assertThat(visit("jp.skypencil.jsr305.nullable.package_annotated_with_nonnull").isNullableByDefault(), is(false));
 	}
 
 	@Test
-	public void testWithoutAnnotation() throws IOException {
+	public void testWithNullableAnnotation() throws IOException {
+		assertThat(visit("jp.skypencil.jsr305.nullable.package_annotated_with_nullable").isNullableByDefault(), is(true));
 		assertThat(visit("jp.skypencil.jsr305.nullable.package_annotated_with_nullable").isNonnullByDefault(), is(false));
 	}
 

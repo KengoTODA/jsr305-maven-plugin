@@ -30,7 +30,7 @@ public class FlagTest {
 		ClassReader reader = new ClassReader(Resources.toByteArray(Resources.getResource(innerClassName + ".class")));
 		ClassWriter writer = new ClassWriter(0);
 		Setting setting = new Setting(Scope.PRIVATE);
-		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, null, setting, new PackageInfo(false)), 0);
+		reader.accept(new MavenJSR305ClassVisitor(Opcodes.V1_6, writer, null, null, setting, new PackageInfo(false, false)), 0);
 		byte[] classBinary = writer.toByteArray();
 
 		Class<?> clazz = new OwnClassLoader().defineClass(innerClassName.replaceAll("/", "."), classBinary);

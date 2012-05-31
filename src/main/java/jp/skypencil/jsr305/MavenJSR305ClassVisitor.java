@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.ParametersAreNullableByDefault;
 
 import jp.skypencil.jsr305.negative.NegativeCheckMethodVisitor;
 import jp.skypencil.jsr305.nullable.NullCheckMethodVisitor;
@@ -24,6 +25,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 	private final jp.skypencil.jsr305.regex.Setting regexSetting;
 	private boolean isEnum;
 	private boolean nonnullByDefault;
+	private boolean nullableByDefault;
 
 	public MavenJSR305ClassVisitor(int api, ClassVisitor inner,
 			@Nullable jp.skypencil.jsr305.nullable.Setting nullCheckSetting,
@@ -35,6 +37,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		this.nonnegativeCheckSetting = nonnegativeCheckSetting;
 		this.regexSetting = regexSetting;
 		this.nonnullByDefault = checkNotNull(info).isNonnullByDefault();
+		this.nullableByDefault = info.isNullableByDefault();
 	}
 
 	@Override
@@ -47,6 +50,10 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
 		if (desc.equals(Type.getDescriptor(ParametersAreNonnullByDefault.class))) {
 			this.nonnullByDefault = true;
+			this.nullableByDefault = false;
+		} else if (desc.equals(Type.getDescriptor(ParametersAreNullableByDefault.class))) {
+			this.nonnullByDefault = false;
+			this.nullableByDefault = true;
 		}
 		return super.visitAnnotation(desc, visible);
 	}
@@ -62,7 +69,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		if (isEnum && NAME_OF_CONSTRCTOR.equals(name)) {
 			// don't inject to constructors of Enum, because it gets null always
 		} else if (nullCheckSetting != null && nullCheckSetting.getTargetScope().contains(methodScope)) {
-			mv = new NullCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nullCheckSetting, this.nonnullByDefault);
+			mv = new NullCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nullCheckSetting, this.nonnullByDefault, this.nullableByDefault);
 		}
 		if (nonnegativeCheckSetting != null && nonnegativeCheckSetting.getTargetScope().contains(methodScope)) {
 			mv = new NegativeCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nonnegativeCheckSetting);

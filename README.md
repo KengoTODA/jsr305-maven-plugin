@@ -129,6 +129,7 @@ You can write them in your pom.xml. For example:
 
 ## 1.1
 - supported @ParametersAreNonnullByDefault
+- supported @ParametersAreNullableByDefault
 - renamed from maven-jsr305-plugin to jsr305-maven-plugin 
 
 

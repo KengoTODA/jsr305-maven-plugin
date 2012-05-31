@@ -59,4 +59,9 @@ class PermissiveStrategyFactory implements NullCheckStrategyFactory {
 	public void markAsNonnullByDefault() {
 		this.nonnullByDefault = true;
 	}
+
+	@Override
+	public void markAsNullableByDefault() {
+		this.nonnullByDefault = false;
+	}
 }

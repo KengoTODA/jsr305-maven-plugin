@@ -1,6 +1,7 @@
 package jp.skypencil.jsr305.nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.ParametersAreNullableByDefault;
 
 import jp.skypencil.jsr305.OrdinalBuilder;
 
@@ -12,13 +13,14 @@ import org.objectweb.asm.Type;
 
 public class NullCheckMethodVisitor extends MethodVisitor {
 	private static final String DESC_PARAMETERS_NONNULL_BY_DEFAULT = Type.getDescriptor(ParametersAreNonnullByDefault.class);
+	private static final String DESC_PARAMETERS_NULLABLE_BY_DEFAULT = Type.getDescriptor(ParametersAreNullableByDefault.class);
 	private final NullCheckStrategyFactory factory;
 	private final boolean isStaticMethod;
 	private final Type[] argumentTypes;
 	private final Class<? extends Throwable> exception;
 	private final NullCheckLevel level;
 
-	public NullCheckMethodVisitor(int api, MethodVisitor inner, boolean isStatic, Type[] argumentTypes, Setting setting, boolean nonnullByDefault) {
+	public NullCheckMethodVisitor(int api, MethodVisitor inner, boolean isStatic, Type[] argumentTypes, Setting setting, boolean nonnullByDefault, boolean nullableByDefault) {
 		super(api, inner);
 		this.level = setting.getLevel();
 		this.isStaticMethod = isStatic;
@@ -28,6 +30,8 @@ public class NullCheckMethodVisitor extends MethodVisitor {
 		this.factory = level.createFactory(argumentTypes.length);
 		if (nonnullByDefault) {
 			this.factory.markAsNonnullByDefault();
+		} else if (nullableByDefault) {
+			this.factory.markAsNullableByDefault();
 		}
 	}
 
@@ -35,6 +39,8 @@ public class NullCheckMethodVisitor extends MethodVisitor {
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
 		if (desc.equals(DESC_PARAMETERS_NONNULL_BY_DEFAULT)) {
 			this.factory.markAsNonnullByDefault();
+		} else if (desc.equals(DESC_PARAMETERS_NULLABLE_BY_DEFAULT)) {
+			this.factory.markAsNullableByDefault();
 		}
 		return super.visitAnnotation(desc, visible);
 	}

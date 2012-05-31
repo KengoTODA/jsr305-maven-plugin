@@ -13,7 +13,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class NonnullByDefaultTest extends AbstractTest {
+public class NullableByDefaultTest extends AbstractTest {
 	@Parameters
 	public static List<Object[]> data() {
 		return Arrays.asList(new Object[][]{
@@ -22,27 +22,27 @@ public class NonnullByDefaultTest extends AbstractTest {
 		});
 	}
 
-	public NonnullByDefaultTest(NullCheckLevel level) throws IOException {
-		super(level, Scope.PUBLIC, Scope.PUBLIC, true, true);
+	public NullableByDefaultTest(NullCheckLevel level) throws IOException {
+		super(level, Scope.PUBLIC, Scope.PUBLIC, true, false);
 	}
 
 	@Test
 	public void testAnnotatedPackage() throws Throwable {
-		test("jp/skypencil/jsr305/nullable/package_annotated_with_nonnull/NonnullByDefaultPackage", IllegalArgumentException.class);
+		test("jp/skypencil/jsr305/nullable/package_annotated_with_nullable/NullableByDefaultPackage", IllegalArgumentException.class);
 	}
 
 	@Test
 	public void testAnnotatedClass() throws Throwable {
-		test("jp/skypencil/jsr305/nullable/NonnullByDefaultClass", IllegalArgumentException.class);
+		test("jp/skypencil/jsr305/nullable/NullableByDefaultClass", IllegalArgumentException.class);
 	}
 
 	@Test
 	public void testOverWrittenClass() throws Throwable {
-		test("jp/skypencil/jsr305/nullable/OverWrittenByNonnullClass", IllegalArgumentException.class);
+		test("jp/skypencil/jsr305/nullable/OverWrittenByNullableClass", IllegalArgumentException.class);
 	}
 
 	@Test
 	public void testAnnotatedMethod() throws Throwable {
-		test("jp/skypencil/jsr305/nullable/NonnullByDefaultMethod", IllegalArgumentException.class);
+		test("jp/skypencil/jsr305/nullable/NullableByDefaultMethod", IllegalArgumentException.class);
 	}
 }
