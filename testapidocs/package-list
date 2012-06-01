@@ -1,4 +1,6 @@
 jp.skypencil.jsr305
 jp.skypencil.jsr305.negative
 jp.skypencil.jsr305.nullable
+jp.skypencil.jsr305.nullable.package_annotated_with_nonnull
+jp.skypencil.jsr305.nullable.package_annotated_with_nullable
 jp.skypencil.jsr305.regex
