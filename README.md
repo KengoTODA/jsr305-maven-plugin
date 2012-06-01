@@ -1,10 +1,9 @@
-# jsr305-maven-plugin
-a Maven plugin which injects precondition check logics to your classes.
+# Goodbye pre-condition check
+Are you still coding boring precondition check in your project?
+The `jsr305-maven-plugin` injects precondition check logics to classes for you!
+What you have to do is: using [JSR305](http://code.google.com/p/jsr-305/) annotations.
 
 ![built and tested on DEV@cloud](http://static-www.cloudbees.com/images/badges/BuiltOnDEV.png)
-
-## about jsr305
- - http://code.google.com/p/jsr-305/
 
 # how to use
 Just write this in your pom.xml.
