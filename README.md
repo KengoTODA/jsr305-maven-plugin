@@ -130,6 +130,7 @@ You can write them in your pom.xml. For example:
 - supported @ParametersAreNonnullByDefault
 - supported @ParametersAreNullableByDefault
 - renamed from maven-jsr305-plugin to jsr305-maven-plugin 
+- reducing PMD warnings
 
 
 # copyright and license
