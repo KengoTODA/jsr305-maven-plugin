@@ -12,8 +12,8 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 public class NullCheckMethodVisitor extends MethodVisitor {
-	private static final String DESC_PARAMETERS_NONNULL_BY_DEFAULT = Type.getDescriptor(ParametersAreNonnullByDefault.class);
-	private static final String DESC_PARAMETERS_NULLABLE_BY_DEFAULT = Type.getDescriptor(ParametersAreNullableByDefault.class);
+	private static final String DESC_PRMS_NONNULL_BY_DEFAULT = Type.getDescriptor(ParametersAreNonnullByDefault.class);
+	private static final String DESC_PRMS_NULLABLE_BY_DEFAULT = Type.getDescriptor(ParametersAreNullableByDefault.class);
 	private final NullCheckStrategyFactory factory;
 	private final boolean isStaticMethod;
 	private final Type[] argumentTypes;
@@ -37,9 +37,9 @@ public class NullCheckMethodVisitor extends MethodVisitor {
 
 	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-		if (desc.equals(DESC_PARAMETERS_NONNULL_BY_DEFAULT)) {
+		if (desc.equals(DESC_PRMS_NONNULL_BY_DEFAULT)) {
 			this.factory.markAsNonnullByDefault();
-		} else if (desc.equals(DESC_PARAMETERS_NULLABLE_BY_DEFAULT)) {
+		} else if (desc.equals(DESC_PRMS_NULLABLE_BY_DEFAULT)) {
 			this.factory.markAsNullableByDefault();
 		}
 		return super.visitAnnotation(desc, visible);
