@@ -13,7 +13,7 @@ Just write this in your pom.xml.
     		<plugin>
     			<groupId>jp.skypencil</groupId>
     			<artifactId>jsr305-maven-plugin</artifactId>
-    			<version>1.1-SNAPSHOT</version>
+    			<version>1.1</version>
     			<executions>
     				<execution>
     					<goals>
