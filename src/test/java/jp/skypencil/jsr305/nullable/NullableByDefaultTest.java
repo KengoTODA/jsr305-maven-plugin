@@ -37,8 +37,18 @@ public class NullableByDefaultTest extends AbstractTest {
 	}
 
 	@Test
-	public void testOverWrittenClass() throws Throwable {
+	public void testMethodAnnotationOverWriteClassAnnotation() throws Throwable {
 		test("jp/skypencil/jsr305/nullable/OverWrittenByNullableClass", IllegalArgumentException.class);
+	}
+
+	@Test
+	public void testMethodAnnotationOverWritePackageAnnotation() throws Throwable {
+		test("jp/skypencil/jsr305/nullable/package_annotated_with_nonnull/OverWrittenByMethod", IllegalArgumentException.class);
+	}
+
+	@Test
+	public void testClassAnnotationOverWritePackageAnnotation() throws Throwable {
+		test("jp/skypencil/jsr305/nullable/package_annotated_with_nonnull/OverWrittenByClass", IllegalArgumentException.class);
 	}
 
 	@Test
