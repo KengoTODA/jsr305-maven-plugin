@@ -66,7 +66,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		Type[] argumentTypes = Type.getArgumentTypes(desc);
 		boolean isStaticMethod = (access & Opcodes.ACC_STATIC) != 0;
 
-		if (isEnum && NAME_OF_CONSTRCTOR.equals(name)) {
+		if (isEnum && NAME_OF_CONSTRCTOR.equals(name)) { // NOPMD
 			// don't inject to constructors of Enum, because it gets null always
 		} else if (nullCheckSetting != null && nullCheckSetting.getTargetScope().contains(methodScope)) {
 			mv = new NullCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nullCheckSetting, this.nonnullByDefault, this.nullableByDefault);
