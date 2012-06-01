@@ -61,7 +61,7 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc,
 			@Nullable String signature, @Nullable String[] exceptions) {
-		MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
+		MethodVisitor methodVisitor = super.visitMethod(access, name, desc, signature, exceptions);
 		Scope methodScope = scopeOf(access);
 		Type[] argumentTypes = Type.getArgumentTypes(desc);
 		boolean isStaticMethod = (access & Opcodes.ACC_STATIC) != 0;
@@ -69,16 +69,16 @@ public class MavenJSR305ClassVisitor extends ClassVisitor {
 		if (isEnum && NAME_OF_CONSTRCTOR.equals(name)) { // NOPMD
 			// don't inject to constructors of Enum, because it gets null always
 		} else if (nullCheckSetting != null && nullCheckSetting.getTargetScope().contains(methodScope)) {
-			mv = new NullCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nullCheckSetting, this.nonnullByDefault, this.nullableByDefault);
+			methodVisitor= new NullCheckMethodVisitor(api, methodVisitor, isStaticMethod, argumentTypes, nullCheckSetting, this.nonnullByDefault, this.nullableByDefault);
 		}
 		if (nonnegativeCheckSetting != null && nonnegativeCheckSetting.getTargetScope().contains(methodScope)) {
-			mv = new NegativeCheckMethodVisitor(api, mv, isStaticMethod, argumentTypes, nonnegativeCheckSetting);
+			methodVisitor = new NegativeCheckMethodVisitor(api, methodVisitor, isStaticMethod, argumentTypes, nonnegativeCheckSetting);
 		}
 		if (regexSetting != null && regexSetting.getTargetScope().contains(methodScope)) {
-			mv = new MatchesPatternMethodVisitor(api, mv, isStaticMethod, argumentTypes, regexSetting);
+			methodVisitor = new MatchesPatternMethodVisitor(api, methodVisitor, isStaticMethod, argumentTypes, regexSetting);
 		}
 
-		return mv;
+		return methodVisitor;
 	}
 
 	private Scope scopeOf(int access) {
