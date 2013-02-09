@@ -9,7 +9,7 @@
 	<artifactId>jsr305-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
 	<name>jsr305-maven-plugin Maven Mojo</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/eller86/jsr305-maven-plugin</url>
 	<version>1.3-SNAPSHOT</version>
 	<description>a Maven plugin which injects precondition check logics to your classes.</description>
 	<properties>
