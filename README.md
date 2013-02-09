@@ -43,6 +43,7 @@ This feature has 3 configurations.
 
 You can write them in your pom.xml. For example:
 
+```xml
   <configuration>
   	<nullCheck>
   		<targetScope>DEFAULT</targetScope>
@@ -50,6 +51,7 @@ You can write them in your pom.xml. For example:
   		<exception>java.lang.NullPointerException</exception>
   	</nullCheck>
   </configuration>
+```
 
 ### 1st configuration: target scope
 If you choose `PROTECTED` for target scope, check logics will be injected to `public` and `protected` methods
@@ -78,12 +80,14 @@ This feature has 2 configurations.
 
 You can write them in your pom.xml. For example:
 
+```xml
   <configuration>
   	<negativeCheck>
   		<targetScope>DEFAULT</targetScope>
   		<exception>java.lang.IllegalArgumentException</exception>
   	</negativeCheck>
   </configuration>
+```
 
 Please note that this feature handles NaN arguments as negative.
 
@@ -96,13 +100,14 @@ This feature has 2 configurations.
 
 You can write them in your pom.xml. For example:
 
+```xml
   <configuration>
   	<regexCheck>
   		<targetScope>DEFAULT</targetScope>
   		<exception>java.lang.IllegalArgumentException</exception>
   	</regexCheck>
   </configuration>
-
+```
 
 # History
 ## 0.1
