@@ -8,34 +8,29 @@ What you have to do is: using [JSR305](http://code.google.com/p/jsr-305/) annota
 # how to use
 Just write this in your pom.xml.
 
-    <build>
-    	<plugins>
-    		<plugin>
-    			<groupId>jp.skypencil</groupId>
-    			<artifactId>jsr305-maven-plugin</artifactId>
-    			<version>1.1</version>
-    			<executions>
-    				<execution>
-    					<goals>
-    						<goal>enhance</goal>
-    					</goals>
-    					<configurations>
-    						...
-    					</configurations>
-    				</execution>
-    			</executions>
-    		</plugin>
-    		...
-    	</plugins>
-    	...
-    </build>
-    <pluginRepositories>
-    	<pluginRepository>
-    		<!-- repository for jsr305-maven-plugin -->
-    		<id>release.skypencil.forge.cloudbees.com</id>
-    		<url>http://repository-skypencil.forge.cloudbees.com/release/</url>
-    	</pluginRepository>
-    </pluginRepositories>
+```xml
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>jp.skypencil</groupId>
+  			<artifactId>jsr305-maven-plugin</artifactId>
+  			<version>1.2</version>
+  			<executions>
+  				<execution>
+  					<goals>
+  						<goal>enhance</goal>
+  					</goals>
+  					<configurations>
+  						...
+  					</configurations>
+  				</execution>
+  			</executions>
+  		</plugin>
+  		...
+  	</plugins>
+  	...
+  </build>
+```
 
 # features
 ## Null check
@@ -48,13 +43,13 @@ This feature has 3 configurations.
 
 You can write them in your pom.xml. For example:
 
-    <configuration>
-    	<nullCheck>
-    		<targetScope>DEFAULT</targetScope>
-    		<level>STRICT</level>
-    		<exception>java.lang.NullPointerException</exception>
-    	</nullCheck>
-    </configuration>
+  <configuration>
+  	<nullCheck>
+  		<targetScope>DEFAULT</targetScope>
+  		<level>STRICT</level>
+  		<exception>java.lang.NullPointerException</exception>
+  	</nullCheck>
+  </configuration>
 
 ### 1st configuration: target scope
 If you choose `PROTECTED` for target scope, check logics will be injected to `public` and `protected` methods
@@ -83,12 +78,12 @@ This feature has 2 configurations.
 
 You can write them in your pom.xml. For example:
 
-    <configuration>
-    	<negativeCheck>
-    		<targetScope>DEFAULT</targetScope>
-    		<exception>java.lang.IllegalArgumentException</exception>
-    	</negativeCheck>
-    </configuration>
+  <configuration>
+  	<negativeCheck>
+  		<targetScope>DEFAULT</targetScope>
+  		<exception>java.lang.IllegalArgumentException</exception>
+  	</negativeCheck>
+  </configuration>
 
 Please note that this feature handles NaN arguments as negative.
 
@@ -101,12 +96,12 @@ This feature has 2 configurations.
 
 You can write them in your pom.xml. For example:
 
-    <configuration>
-    	<regexCheck>
-    		<targetScope>DEFAULT</targetScope>
-    		<exception>java.lang.IllegalArgumentException</exception>
-    	</regexCheck>
-    </configuration>
+  <configuration>
+  	<regexCheck>
+  		<targetScope>DEFAULT</targetScope>
+  		<exception>java.lang.IllegalArgumentException</exception>
+  	</regexCheck>
+  </configuration>
 
 
 # History
@@ -132,15 +127,17 @@ You can write them in your pom.xml. For example:
 - renamed from maven-jsr305-plugin to jsr305-maven-plugin 
 - reducing PMD warnings
 
+## 1.2
+- released to Maven central
 
 # copyright and license
-Copyright 2012 Kengo TODA (eller86)
+Copyright 2012-2013 Kengo TODA (eller86)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
