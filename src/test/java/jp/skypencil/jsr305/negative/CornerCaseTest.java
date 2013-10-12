@@ -1,5 +1,6 @@
 package jp.skypencil.jsr305.negative;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -9,8 +10,8 @@ import java.lang.reflect.Method;
 import jp.skypencil.jsr305.MavenJSR305ClassVisitor;
 import jp.skypencil.jsr305.PackageInfo;
 import jp.skypencil.jsr305.Scope;
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -98,7 +99,7 @@ public class CornerCaseTest {
 			method.invoke(instance, new Object());
 			Assert.fail();
 		} catch (InvocationTargetException expected) {
-			assertThat(expected.getCause(), is(ClassCastException.class));
+			assertThat(expected.getCause(), is(instanceOf(ClassCastException.class)));
 		}
 	}
 
@@ -117,7 +118,7 @@ public class CornerCaseTest {
 			method.invoke(instance, Double.NaN);
 			Assert.fail();
 		} catch (InvocationTargetException expected) {
-			assertThat(expected.getCause(), is(IllegalArgumentException.class));
+			assertThat(expected.getCause(), is(instanceOf(IllegalArgumentException.class)));
 		}
 	}
 
@@ -150,7 +151,7 @@ public class CornerCaseTest {
 			method.invoke(instance, Double.NEGATIVE_INFINITY);
 			Assert.fail();
 		} catch (InvocationTargetException expected) {
-			assertThat(expected.getCause(), is(IllegalArgumentException.class));
+			assertThat(expected.getCause(), is(instanceOf(IllegalArgumentException.class)));
 		}
 	}
 

@@ -1,5 +1,6 @@
 package jp.skypencil.jsr305.regex;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -96,7 +97,7 @@ public class MatchesPatternTest {
 			method.invoke(instance, new Object[] { argument });
 			return false;
 		} catch (InvocationTargetException expected) {
-			assertThat(expected.getTargetException(), is(IllegalArgumentException.class));
+			assertThat(expected.getTargetException(), is(instanceOf(IllegalArgumentException.class)));
 			return true;
 		}
 	}

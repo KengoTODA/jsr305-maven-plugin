@@ -1,5 +1,6 @@
 package jp.skypencil.jsr305.nullable;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -68,7 +69,7 @@ abstract class AbstractTest {
 			method.invoke(instance, new Object[] { null });
 			return false;
 		} catch (InvocationTargetException expected) {
-			assertThat(expected.getTargetException(), is(exception));
+			assertThat(expected.getTargetException(), is(instanceOf(exception)));
 			return true;
 		}
 	}

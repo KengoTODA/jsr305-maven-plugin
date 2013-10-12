@@ -34,7 +34,7 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	/**
 	 * Place where target classes are.
 	 * 
-	 * @parameter expression="${jsr305.classes}"
+	 * @parameter property="jsr305.classes"
 	 *            default-value="${project.build.outputDirectory}"
 	 * @required
 	 */

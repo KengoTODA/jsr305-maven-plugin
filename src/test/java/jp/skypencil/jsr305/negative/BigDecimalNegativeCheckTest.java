@@ -1,5 +1,6 @@
 package jp.skypencil.jsr305.negative;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -34,7 +35,7 @@ public class BigDecimalNegativeCheckTest extends NegativeCheckTest {
 			method.invoke(instance, new Object[] { BigDecimal.ONE.negate() });
 			return false;
 		} catch (InvocationTargetException expected) {
-			assertThat(expected.getTargetException(), is(exception));
+			assertThat(expected.getTargetException(), is(instanceOf(exception)));
 			return true;
 		}
 	}
