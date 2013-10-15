@@ -21,23 +21,28 @@ import java.io.IOException;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 
 /**
  * enhance check codes
  * 
- * @goal enhance
- * @phase process-classes
- * @requiresDependencyResolution compile
  * @author eller86 (Kengo TODA)
  */
+@Mojo(
+        name = "enhance",
+        requiresDependencyResolution = ResolutionScope.COMPILE,
+        defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class MavenJSR305Mojo extends AbstractMojo {
 	/**
 	 * Place where target classes are.
-	 * 
-	 * @parameter property="jsr305.classes"
-	 *            default-value="${project.build.outputDirectory}"
-	 * @required
 	 */
+    @Parameter(
+            property = "jsr305.classes",
+            required = true,
+            defaultValue = "${project.build.outputDirectory}")
 	protected File classesDirectory;
 	/**
 	 * Setting for null check. default is:
@@ -49,9 +54,8 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 *   &lt;exception&gt;java.lang.IllegalArgumentException&lt;/exception&gt;
 	 * &lt;/nullCheck&gt;
 	 * &lt;/configuration&gt;</pre>
-	 * 
-	 * @parameter
 	 */
+    @Parameter
 	protected jp.skypencil.jsr305.nullable.Setting nullCheck;
 	/**
 	 * Setting for negative check. default is:
@@ -61,9 +65,8 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 *     &lt;exception&gt;java.lang.IllegalArgumentException&lt;/exception&gt;
 	 *   &lt;/negativeCheck&gt;
 	 * &lt;/configuration&gt;</pre>
-	 * 
-	 * @parameter
 	 */
+    @Parameter
 	protected jp.skypencil.jsr305.negative.Setting negativeCheck;
 	/**
 	 * Setting for regex check. default is:
@@ -73,9 +76,8 @@ public class MavenJSR305Mojo extends AbstractMojo {
 	 *     &lt;exception&gt;java.lang.IllegalArgumentException&lt;/exception&gt;
 	 *   &lt;/regexCheck&gt;
 	 * &lt;/configuration&gt;</pre>
-	 * 
-	 * @parameter
 	 */
+    @Parameter
 	protected jp.skypencil.jsr305.regex.Setting regexCheck;
 
 	@Override
