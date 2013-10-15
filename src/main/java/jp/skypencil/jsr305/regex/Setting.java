@@ -2,9 +2,9 @@ package jp.skypencil.jsr305.regex;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import jp.skypencil.jsr305.Scope;
+
+import com.google.common.annotations.VisibleForTesting;
 
 public class Setting {
 	private Scope targetScope = Scope.PUBLIC;

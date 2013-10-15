@@ -7,10 +7,9 @@ import static org.junit.Assert.assertThat;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.junit.Assert;
-
 import jp.skypencil.jsr305.Scope;
-import jp.skypencil.jsr305.negative.NegativeCheckLevel;
+
+import org.junit.Assert;
 
 public class FloatNegativeCheckTest extends NegativeCheckTest {
 

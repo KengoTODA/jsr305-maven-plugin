@@ -12,8 +12,6 @@ import javax.annotation.Nonnegative;
 import jp.skypencil.jsr305.MavenJSR305ClassVisitor;
 import jp.skypencil.jsr305.PackageInfo;
 import jp.skypencil.jsr305.Scope;
-import jp.skypencil.jsr305.negative.NegativeCheckLevel;
-import jp.skypencil.jsr305.negative.Setting;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
